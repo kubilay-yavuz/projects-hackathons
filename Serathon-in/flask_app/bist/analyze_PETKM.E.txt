@@ -1,0 +1,7 @@
+Yatýrým mantýksýz, çünkü:
+Þu an için MACD_ISLEM FIYATI_EPLAS.E deðeri 0.0 deðerinden küçük.
+Þu an için MACD_ISLEM FIYATI_AQIUL.V deðeri 0.0 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_TTDKC.V deðeri 80.324 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_HBDAL.V deðeri 0.2256 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_TUIMB.V deðeri 11.7181 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_YKDZM.V deðeri 2.0548 deðerinden küçük.

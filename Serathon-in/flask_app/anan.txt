@@ -1,0 +1,1 @@
+{"error":0,"message":"Success","distribution":[{"assetCode":"GOLD","weight":30.08600},{"assetCode":"BONDS","weight":18.44500},{"assetCode":"USD","weight":38.77900},{"assetCode":"XU030","weight":12.6900}]}

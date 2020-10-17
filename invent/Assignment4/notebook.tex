@@ -1,0 +1,2069 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{invent\_task}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{glob}\PY{o}{,}\PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} 
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fivethirtyeight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}context}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{paper}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}style}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{darkgrid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{train\PYZus{}df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{assignment4.1a.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{test\PYZus{}df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{assignment4.1b.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{test\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{prod\PYZus{}conv}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{assignment4.1c.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{global} \PY{n}{promo\PYZus{}dates}
+        \PY{n}{promo\PYZus{}dates}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PromotionDates.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Something was wrong with this df i fixed it.}
+        \PY{n}{promo\PYZus{}dates}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StartDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{promo\PYZus{}dates}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StartDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m/}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{promo\PYZus{}dates}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EndDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{promo\PYZus{}dates}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EndDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m/}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}         Date  StoreCode  ProductCode  SalesQuantity
+        0 2015-01-01          8            9             -1
+        1 2015-01-01        131            9              1
+        2 2015-01-01        144            9              2
+        3 2015-01-01        203            9              2
+        4 2015-01-01        256            9              0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{promo\PYZus{}dates}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}     Period  StartDate    EndDate
+        0   Promo1 2015-02-10 2015-02-17
+        1   Promo2 2015-03-15 2015-03-22
+        2   Promo3 2015-05-24 2015-06-01
+        3   Promo4 2015-06-21 2015-06-28
+        4   Promo5 2015-09-01 2015-09-06
+        5  Promo6  2015-11-20 2015-11-27
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{check\PYZus{}if\PYZus{}promo}\PY{p}{(}\PY{n}{date}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{row} \PY{o+ow}{in} \PY{n}{promo\PYZus{}dates}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StartDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{date}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EndDate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                    \PY{k}{return} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{promos\PYZus{}binary}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+        \PY{n}{promos\PYZus{}binary}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2015\PYZhy{}01\PYZhy{}01}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2016\PYZhy{}01\PYZhy{}02}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{promos\PYZus{}binary}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{promos\PYZus{}binary}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{check\PYZus{}if\PYZus{}promo}\PY{p}{)}
+        \PY{n}{promos\PYZus{}binary}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}           Date  IsPromotion
+        352 2015-12-19            0
+        130 2015-05-11            0
+        218 2015-08-07            0
+        285 2015-10-13            0
+        4   2015-01-05            0
+        88  2015-03-30            0
+        205 2015-07-25            0
+        336 2015-12-03            0
+        333 2015-11-30            0
+        277 2015-10-05            0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} fig,ax=plt.subplots(nrows=2,figsize=(19,10))}
+         \PY{c+c1}{\PYZsh{} sns.lineplot(x=sales\PYZus{}df.Date.values,y=sales\PYZus{}df.SalesQuantity.values,ax=ax[0],color=\PYZdq{}green\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} sns.lineplot(x=\PYZdq{}Date\PYZdq{},y=\PYZdq{}SalesQuantity\PYZdq{},data=sales\PYZus{}prods,ax=ax[1],hue=\PYZdq{}ProductCode\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} [ax[0].axvspan(promo\PYZus{}dates.loc[promo\PYZus{}dates[\PYZdq{}Period\PYZdq{}]==promo].values[0][1],promo\PYZus{}dates.loc[promo\PYZus{}dates[\PYZdq{}Period\PYZdq{}]==promo].values[0][2]) for promo in promo\PYZus{}dates[\PYZdq{}Period\PYZdq{}].values[:\PYZhy{}2]]}
+         \PY{c+c1}{\PYZsh{} [ax[1].axvspan(promo\PYZus{}dates.loc[promo\PYZus{}dates[\PYZdq{}Period\PYZdq{}]==promo].values[0][1],promo\PYZus{}dates.loc[promo\PYZus{}dates[\PYZdq{}Period\PYZdq{}]==promo].values[0][2]) for promo in promo\PYZus{}dates[\PYZdq{}Period\PYZdq{}].values[:\PYZhy{}2]];}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{sales}\PY{o}{=}\PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{returns}\PY{o}{=}\PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} pd.pivot\PYZus{}table(sales,values=[\PYZdq{}SalesQuantity\PYZdq{}],columns=[\PYZdq{}ProductCode\PYZdq{}],index=[\PYZdq{}Date\PYZdq{},\PYZdq{}StoreCode\PYZdq{}])}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{returns}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{values}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{aggfunc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sum}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 126, 167, 256, 257, 166 has the most returns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}              SalesQuantity
+         ProductCode               
+         126                  -1121
+         167                   -663
+         256                   -640
+         257                   -637
+         166                   -545
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sales\PYZus{}prods}\PY{o}{=}\PY{n}{returns}\PY{p}{[}\PY{n}{returns}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{126}\PY{p}{,} \PY{l+m+mi}{167}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{257}\PY{p}{,} \PY{l+m+mi}{166}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{sales\PYZus{}prods}\PY{p}{,}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{p}{[}\PY{n}{plt}\PY{o}{.}\PY{n}{axvspan}\PY{p}{(}\PY{n}{promo\PYZus{}dates}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{promo\PYZus{}dates}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Period}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{n}{promo}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{promo\PYZus{}dates}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{promo\PYZus{}dates}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Period}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{n}{promo}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{promo} \PY{o+ow}{in} \PY{n}{promo\PYZus{}dates}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Period}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+c:\textbackslash{}python\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}scipy\textbackslash{}stats\textbackslash{}stats.py:1706: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+c:\textbackslash{}python\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}plotting\textbackslash{}\_matplotlib\textbackslash{}converter.py:102: FutureWarning: Using an implicitly registered datetime converter for a matplotlib plotting method. The converter was registered by pandas on import. Future versions of pandas will require you to explicitly register matplotlib converters.
+
+To register the converters:
+	>>> from pandas.plotting import register\_matplotlib\_converters
+	>>> register\_matplotlib\_converters()
+  warnings.warn(msg, FutureWarning)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{fast-medium-and-slow-stores-and-items}{%
+\subsubsection{Fast, Medium and Slow stores and
+items}\label{fast-medium-and-slow-stores-and-items}}
+
+    \hypertarget{stores}{%
+\paragraph{Stores}\label{stores}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{sales}\PY{p}{,}\PY{n}{values}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{aggfunc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sum}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x13150715710>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Slow}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{n}{x}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{202} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Medium}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{l+m+mi}{202}\PY{o}{\PYZlt{}}\PY{n}{x}\PY{o}{\PYZlt{}}\PY{l+m+mi}{307} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} sales\PYZus{}agg\PYZus{}by\PYZus{}store.to\PYZus{}csv(\PYZdq{}store\PYZus{}type.csv\PYZdq{},index=False)}
+\end{Verbatim}
+
+
+    \hypertarget{items}{%
+\paragraph{Items}\label{items}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{sales}\PY{p}{,}\PY{n}{values}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{aggfunc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sum}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x131506984e0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{295}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x131506d4c50>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prod\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Slow}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{n}{x}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{260} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Medium}\PY{l+s+s2}{\PYZdq{}} 
+                                                                                               \PY{k}{if} \PY{l+m+mi}{260}\PY{o}{\PYZlt{}}\PY{n}{x}\PY{o}{\PYZlt{}}\PY{l+m+mi}{295} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} sales\PYZus{}agg\PYZus{}by\PYZus{}product.to\PYZus{}csv(\PYZdq{}product\PYZus{}type.csv\PYZdq{},index=False)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{o}{=}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{o}{=}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prod\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{adding-promotion-field-to-the-main-data}{%
+\paragraph{Adding promotion field to the main
+data}\label{adding-promotion-field-to-the-main-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{train\PYZus{}transf}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{,}\PY{n}{promos\PYZus{}binary}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}transf}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{,}\PY{n}{promos\PYZus{}binary}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{train\PYZus{}transf}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{train\PYZus{}transf}\PY{p}{,}\PY{n}{prod\PYZus{}conv}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}transf}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{test\PYZus{}transf}\PY{p}{,}\PY{n}{prod\PYZus{}conv}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{sales}\PY{o}{=}\PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{sales}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{sales}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{values}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{aggfunc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sum}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{sales}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{sales}\PY{p}{,}\PY{n}{promos\PYZus{}binary}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{finding-the-most-quantity-increasing-product-in-promotions}{%
+\paragraph{Finding the most quantity increasing product in
+promotions}\label{finding-the-most-quantity-increasing-product-in-promotions}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{mean\PYZus{}sales\PYZus{}prom}\PY{o}{=}\PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mean\PYZus{}sales\PYZus{}wo\PYZus{}prom}\PY{o}{=}\PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{mean\PYZus{}sales\PYZus{}wo\PYZus{}prom}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{mean\PYZus{}sales\PYZus{}prom}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{before\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{increase}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{before\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{sales\PYZus{}diff}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{del} \PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{=}\PY{n}{sales\PYZus{}diff}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{increase}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:}      before\_promotion  in\_promotion   increase  ProductCode prod\_type
+         251        147.128492    232.606061  85.477569        256.0      Slow
+         326        242.128492    326.636364  84.507872          NaN       NaN
+         271        207.893855    289.303030  81.409176        276.0      Slow
+         115        161.910615    240.393939  78.483325        117.0      Slow
+         233        153.089385    221.363636  68.274251        238.0    Medium
+         299        128.061453    191.848485  63.787032        304.0      Slow
+         201        114.508380    174.545455  60.037075        205.0      Fast
+         58         169.837989    219.696970  49.858981         60.0      Slow
+         6           91.553073    140.696970  49.143897          7.0      Slow
+         296        170.061453    217.575758  47.514305        301.0      Slow
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{sales}\PY{o}{=}\PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{sales}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{sales}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{values}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{aggfunc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sum}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{sales}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{sales}\PY{p}{,}\PY{n}{promos\PYZus{}binary}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{finding-the-most-percent-increase-of-stores-in-promotions}{%
+\paragraph{Finding the most percent increase of stores in
+promotions}\label{finding-the-most-percent-increase-of-stores-in-promotions}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{mean\PYZus{}sales\PYZus{}prom}\PY{o}{=}\PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mean\PYZus{}sales\PYZus{}wo\PYZus{}prom}\PY{o}{=}\PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{mean\PYZus{}sales\PYZus{}wo\PYZus{}prom}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{mean\PYZus{}sales\PYZus{}prom}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{before\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{percent\PYZus{}increase}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{(}\PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{before\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{before\PYZus{}promotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{sales\PYZus{}diff}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{del} \PY{n}{sales\PYZus{}diff}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{=}\PY{n}{sales\PYZus{}diff}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{percent\PYZus{}increase}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{sales\PYZus{}diff}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:}      before\_promotion  in\_promotion  percent\_increase  StoreCode store\_type
+         90          14.882682     33.757576          1.268246         92       Slow
+         161         15.128492     25.878788          0.710599        164       Slow
+         143         66.564246    112.939394          0.696698        145     Medium
+         179         42.614525     70.545455          0.655432        183       Slow
+         185         37.698324     61.242424          0.624540        189       Slow
+         25          38.547486     62.454545          0.620198         27       Slow
+         279         52.044693     83.121212          0.597112        284     Medium
+         129         70.469274    112.333333          0.594075        131     Medium
+         103         13.290503     21.151515          0.591476        105       Slow
+         272         53.145251     84.363636          0.587416        277     Medium
+\end{Verbatim}
+            
+    \hypertarget{adding-day-month-weekday-and-the-store-and-item-types-to-the-data-in-order-to-feed-to-models}{%
+\paragraph{Adding day, month, weekday and the Store and Item types to
+the data in order to feed to
+models}\label{adding-day-month-weekday-and-the-store-and-item-types-to-the-data-in-order-to-feed-to-models}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{train\PYZus{}transf}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{train\PYZus{}transf}\PY{p}{,}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{train\PYZus{}transf}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{train\PYZus{}transf}\PY{p}{,}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{train\PYZus{}transf}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{day}\PY{p}{)}
+         \PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{train\PYZus{}transf}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{month}\PY{p}{)}
+         \PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{train\PYZus{}transf}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{weekday}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{test\PYZus{}transf}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{test\PYZus{}transf}\PY{p}{,}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}store}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}transf}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{test\PYZus{}transf}\PY{p}{,}\PY{n}{sales\PYZus{}agg\PYZus{}by\PYZus{}product}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{day}\PY{p}{)}
+         \PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{month}\PY{p}{)}
+         \PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{weekday}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{train\PYZus{}transf}\PY{o}{=}\PY{n}{train\PYZus{}transf}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Slow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}transf}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Slow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k+kn}{from} \PY{n+nn}{catboost} \PY{k}{import} \PY{n}{CatBoostRegressor}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}\PY{p}{,}\PY{n}{SGDRegressor}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{OneHotEncoder}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,}\PY{n}{mean\PYZus{}absolute\PYZus{}error}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{train\PYZus{}transf}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{train\PYZus{}transf}\PY{o}{.}\PY{n}{SalesQuantity}\PY{o}{.}\PY{n}{values}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+         \PY{n}{cat\PYZus{}vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductGroup1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductGroup2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prod\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{cat\PYZus{}vars}\PY{o}{=}\PY{p}{[}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cat\PYZus{}vars}\PY{p}{]}
+         
+         \PY{n}{model}\PY{o}{=}\PY{n}{CatBoostRegressor}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{,}\PY{n}{num\PYZus{}boost\PYZus{}round}\PY{o}{=}\PY{l+m+mi}{1100}\PY{p}{,}\PY{n}{early\PYZus{}stopping\PYZus{}rounds}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,}\PY{n}{task\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GPU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}
+                  \PY{n}{eval\PYZus{}set}\PY{o}{=}\PY{p}{[}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{cat\PYZus{}features}\PY{o}{=}\PY{n}{cat\PYZus{}vars}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0:	learn: 5.3022323	test: 5.5051701	best: 5.5051701 (0)	total: 1.31s	remaining: 24m 1s
+1:	learn: 5.1625739	test: 5.3697499	best: 5.3697499 (1)	total: 2.21s	remaining: 20m 16s
+2:	learn: 5.0446832	test: 5.2548833	best: 5.2548833 (2)	total: 2.58s	remaining: 15m 42s
+3:	learn: 4.9471239	test: 5.1598507	best: 5.1598507 (3)	total: 3.01s	remaining: 13m 44s
+4:	learn: 4.8663059	test: 5.0820950	best: 5.0820950 (4)	total: 3.6s	remaining: 13m 7s
+5:	learn: 4.7978645	test: 5.0157992	best: 5.0157992 (5)	total: 4.06s	remaining: 12m 21s
+6:	learn: 4.7375095	test: 4.9567460	best: 4.9567460 (6)	total: 4.55s	remaining: 11m 49s
+7:	learn: 4.6866382	test: 4.9078256	best: 4.9078256 (7)	total: 5.18s	remaining: 11m 46s
+8:	learn: 4.6471107	test: 4.8683332	best: 4.8683332 (8)	total: 5.71s	remaining: 11m 31s
+9:	learn: 4.6124246	test: 4.8341305	best: 4.8341305 (9)	total: 6.18s	remaining: 11m 13s
+10:	learn: 4.5821739	test: 4.8046748	best: 4.8046748 (10)	total: 6.67s	remaining: 11m
+11:	learn: 4.5563612	test: 4.7795383	best: 4.7795383 (11)	total: 7.18s	remaining: 10m 51s
+12:	learn: 4.5363014	test: 4.7600433	best: 4.7600433 (12)	total: 7.61s	remaining: 10m 36s
+13:	learn: 4.5201033	test: 4.7441562	best: 4.7441562 (13)	total: 8.16s	remaining: 10m 33s
+14:	learn: 4.5018446	test: 4.7262218	best: 4.7262218 (14)	total: 8.73s	remaining: 10m 31s
+15:	learn: 4.4859570	test: 4.7106761	best: 4.7106761 (15)	total: 9.37s	remaining: 10m 34s
+16:	learn: 4.4752933	test: 4.7001070	best: 4.7001070 (16)	total: 9.98s	remaining: 10m 36s
+17:	learn: 4.4621945	test: 4.6872388	best: 4.6872388 (17)	total: 10.6s	remaining: 10m 35s
+18:	learn: 4.4517737	test: 4.6767956	best: 4.6767956 (18)	total: 11.1s	remaining: 10m 32s
+19:	learn: 4.4435253	test: 4.6681034	best: 4.6681034 (19)	total: 11.7s	remaining: 10m 30s
+20:	learn: 4.4361936	test: 4.6603821	best: 4.6603821 (20)	total: 12.1s	remaining: 10m 22s
+21:	learn: 4.4288637	test: 4.6530145	best: 4.6530145 (21)	total: 12.7s	remaining: 10m 20s
+22:	learn: 4.4233674	test: 4.6473463	best: 4.6473463 (22)	total: 13.3s	remaining: 10m 23s
+23:	learn: 4.4171727	test: 4.6406961	best: 4.6406961 (23)	total: 14s	remaining: 10m 26s
+24:	learn: 4.4123113	test: 4.6354420	best: 4.6354420 (24)	total: 14.5s	remaining: 10m 23s
+25:	learn: 4.4073305	test: 4.6304523	best: 4.6304523 (25)	total: 15s	remaining: 10m 19s
+26:	learn: 4.4030794	test: 4.6256199	best: 4.6256199 (26)	total: 15.5s	remaining: 10m 16s
+27:	learn: 4.3995014	test: 4.6216041	best: 4.6216041 (27)	total: 16.1s	remaining: 10m 17s
+28:	learn: 4.3956990	test: 4.6176192	best: 4.6176192 (28)	total: 16.7s	remaining: 10m 18s
+29:	learn: 4.3924799	test: 4.6140985	best: 4.6140985 (29)	total: 17.4s	remaining: 10m 18s
+30:	learn: 4.3890083	test: 4.6102268	best: 4.6102268 (30)	total: 18.1s	remaining: 10m 23s
+31:	learn: 4.3863138	test: 4.6072621	best: 4.6072621 (31)	total: 18.6s	remaining: 10m 20s
+32:	learn: 4.3838931	test: 4.6044096	best: 4.6044096 (32)	total: 19.2s	remaining: 10m 20s
+33:	learn: 4.3816971	test: 4.6020280	best: 4.6020280 (33)	total: 19.7s	remaining: 10m 17s
+34:	learn: 4.3788044	test: 4.5991567	best: 4.5991567 (34)	total: 20.2s	remaining: 10m 13s
+35:	learn: 4.3761410	test: 4.5964610	best: 4.5964610 (35)	total: 20.7s	remaining: 10m 10s
+36:	learn: 4.3731578	test: 4.5937637	best: 4.5937637 (36)	total: 21.1s	remaining: 10m 7s
+37:	learn: 4.3712568	test: 4.5917087	best: 4.5917087 (37)	total: 21.6s	remaining: 10m 4s
+38:	learn: 4.3699054	test: 4.5901604	best: 4.5901604 (38)	total: 22.2s	remaining: 10m 4s
+39:	learn: 4.3675935	test: 4.5882193	best: 4.5882193 (39)	total: 22.7s	remaining: 10m 2s
+40:	learn: 4.3655346	test: 4.5863016	best: 4.5863016 (40)	total: 23.2s	remaining: 10m
+41:	learn: 4.3639078	test: 4.5844320	best: 4.5844320 (41)	total: 23.8s	remaining: 9m 58s
+42:	learn: 4.3619198	test: 4.5822113	best: 4.5822113 (42)	total: 24.3s	remaining: 9m 58s
+43:	learn: 4.3601350	test: 4.5803784	best: 4.5803784 (43)	total: 25.1s	remaining: 10m 2s
+44:	learn: 4.3585608	test: 4.5787617	best: 4.5787617 (44)	total: 25.8s	remaining: 10m 4s
+45:	learn: 4.3572168	test: 4.5774061	best: 4.5774061 (45)	total: 26.3s	remaining: 10m 2s
+46:	learn: 4.3555929	test: 4.5760958	best: 4.5760958 (46)	total: 26.9s	remaining: 10m 1s
+47:	learn: 4.3536038	test: 4.5742428	best: 4.5742428 (47)	total: 27.4s	remaining: 10m
+48:	learn: 4.3514830	test: 4.5722204	best: 4.5722204 (48)	total: 27.9s	remaining: 9m 58s
+49:	learn: 4.3499989	test: 4.5708347	best: 4.5708347 (49)	total: 28.5s	remaining: 9m 58s
+50:	learn: 4.3481389	test: 4.5685724	best: 4.5685724 (50)	total: 29.1s	remaining: 9m 58s
+51:	learn: 4.3468946	test: 4.5673704	best: 4.5673704 (51)	total: 29.6s	remaining: 9m 56s
+52:	learn: 4.3461873	test: 4.5666014	best: 4.5666014 (52)	total: 30.3s	remaining: 9m 57s
+53:	learn: 4.3451416	test: 4.5647355	best: 4.5647355 (53)	total: 30.8s	remaining: 9m 57s
+54:	learn: 4.3434692	test: 4.5633207	best: 4.5633207 (54)	total: 31.4s	remaining: 9m 56s
+55:	learn: 4.3422324	test: 4.5620560	best: 4.5620560 (55)	total: 31.9s	remaining: 9m 55s
+56:	learn: 4.3408257	test: 4.5606497	best: 4.5606497 (56)	total: 32.6s	remaining: 9m 56s
+57:	learn: 4.3400192	test: 4.5598540	best: 4.5598540 (57)	total: 33.2s	remaining: 9m 55s
+58:	learn: 4.3388266	test: 4.5587021	best: 4.5587021 (58)	total: 33.9s	remaining: 9m 57s
+59:	learn: 4.3379544	test: 4.5576567	best: 4.5576567 (59)	total: 34.5s	remaining: 9m 58s
+60:	learn: 4.3372193	test: 4.5568987	best: 4.5568987 (60)	total: 35.1s	remaining: 9m 58s
+61:	learn: 4.3359358	test: 4.5558178	best: 4.5558178 (61)	total: 35.8s	remaining: 9m 58s
+62:	learn: 4.3346151	test: 4.5543508	best: 4.5543508 (62)	total: 36.3s	remaining: 9m 58s
+63:	learn: 4.3331081	test: 4.5530698	best: 4.5530698 (63)	total: 36.9s	remaining: 9m 57s
+64:	learn: 4.3319122	test: 4.5519666	best: 4.5519666 (64)	total: 37.4s	remaining: 9m 55s
+65:	learn: 4.3313019	test: 4.5514248	best: 4.5514248 (65)	total: 37.9s	remaining: 9m 53s
+66:	learn: 4.3299869	test: 4.5500753	best: 4.5500753 (66)	total: 38.4s	remaining: 9m 52s
+67:	learn: 4.3292206	test: 4.5492562	best: 4.5492562 (67)	total: 38.9s	remaining: 9m 50s
+68:	learn: 4.3281547	test: 4.5482504	best: 4.5482504 (68)	total: 39.5s	remaining: 9m 49s
+69:	learn: 4.3274497	test: 4.5471859	best: 4.5471859 (69)	total: 40.1s	remaining: 9m 50s
+70:	learn: 4.3263619	test: 4.5460763	best: 4.5460763 (70)	total: 40.6s	remaining: 9m 48s
+71:	learn: 4.3255382	test: 4.5451014	best: 4.5451014 (71)	total: 41.1s	remaining: 9m 47s
+72:	learn: 4.3245638	test: 4.5443111	best: 4.5443111 (72)	total: 41.8s	remaining: 9m 47s
+73:	learn: 4.3235271	test: 4.5430548	best: 4.5430548 (73)	total: 42.3s	remaining: 9m 47s
+74:	learn: 4.3227197	test: 4.5422430	best: 4.5422430 (74)	total: 43s	remaining: 9m 47s
+75:	learn: 4.3220772	test: 4.5415604	best: 4.5415604 (75)	total: 43.5s	remaining: 9m 46s
+76:	learn: 4.3208424	test: 4.5404058	best: 4.5404058 (76)	total: 44s	remaining: 9m 44s
+77:	learn: 4.3201684	test: 4.5395498	best: 4.5395498 (77)	total: 44.6s	remaining: 9m 44s
+78:	learn: 4.3196898	test: 4.5392279	best: 4.5392279 (78)	total: 45.4s	remaining: 9m 46s
+79:	learn: 4.3185821	test: 4.5384149	best: 4.5384149 (79)	total: 45.9s	remaining: 9m 44s
+80:	learn: 4.3178743	test: 4.5378159	best: 4.5378159 (80)	total: 46.5s	remaining: 9m 45s
+81:	learn: 4.3170755	test: 4.5373404	best: 4.5373404 (81)	total: 47.2s	remaining: 9m 45s
+82:	learn: 4.3162483	test: 4.5367297	best: 4.5367297 (82)	total: 47.8s	remaining: 9m 45s
+83:	learn: 4.3154865	test: 4.5358683	best: 4.5358683 (83)	total: 48.4s	remaining: 9m 45s
+84:	learn: 4.3147915	test: 4.5352005	best: 4.5352005 (84)	total: 48.8s	remaining: 9m 43s
+85:	learn: 4.3139256	test: 4.5343769	best: 4.5343769 (85)	total: 49.3s	remaining: 9m 41s
+86:	learn: 4.3125970	test: 4.5327571	best: 4.5327571 (86)	total: 49.9s	remaining: 9m 40s
+87:	learn: 4.3120565	test: 4.5320844	best: 4.5320844 (87)	total: 50.5s	remaining: 9m 41s
+88:	learn: 4.3109682	test: 4.5309468	best: 4.5309468 (88)	total: 51.1s	remaining: 9m 40s
+89:	learn: 4.3103758	test: 4.5301578	best: 4.5301578 (89)	total: 51.6s	remaining: 9m 39s
+90:	learn: 4.3097984	test: 4.5295768	best: 4.5295768 (90)	total: 52.1s	remaining: 9m 38s
+91:	learn: 4.3093259	test: 4.5289144	best: 4.5289144 (91)	total: 52.7s	remaining: 9m 36s
+92:	learn: 4.3087774	test: 4.5283288	best: 4.5283288 (92)	total: 53.2s	remaining: 9m 35s
+93:	learn: 4.3076929	test: 4.5273788	best: 4.5273788 (93)	total: 53.8s	remaining: 9m 35s
+94:	learn: 4.3072090	test: 4.5269247	best: 4.5269247 (94)	total: 54.3s	remaining: 9m 34s
+95:	learn: 4.3065560	test: 4.5262047	best: 4.5262047 (95)	total: 54.9s	remaining: 9m 33s
+96:	learn: 4.3059234	test: 4.5257505	best: 4.5257505 (96)	total: 55.4s	remaining: 9m 32s
+97:	learn: 4.3051745	test: 4.5252589	best: 4.5252589 (97)	total: 55.8s	remaining: 9m 30s
+98:	learn: 4.3047697	test: 4.5247197	best: 4.5247197 (98)	total: 56.5s	remaining: 9m 31s
+99:	learn: 4.3042421	test: 4.5241217	best: 4.5241217 (99)	total: 57.2s	remaining: 9m 31s
+100:	learn: 4.3037019	test: 4.5236724	best: 4.5236724 (100)	total: 57.8s	remaining: 9m 31s
+101:	learn: 4.3028860	test: 4.5226145	best: 4.5226145 (101)	total: 58.5s	remaining: 9m 31s
+102:	learn: 4.3025017	test: 4.5221718	best: 4.5221718 (102)	total: 59.1s	remaining: 9m 31s
+103:	learn: 4.3019570	test: 4.5214373	best: 4.5214373 (103)	total: 59.7s	remaining: 9m 31s
+104:	learn: 4.3016700	test: 4.5211589	best: 4.5211589 (104)	total: 1m	remaining: 9m 32s
+105:	learn: 4.3010425	test: 4.5205161	best: 4.5205161 (105)	total: 1m 1s	remaining: 9m 32s
+106:	learn: 4.3004128	test: 4.5199920	best: 4.5199920 (106)	total: 1m 1s	remaining: 9m 32s
+107:	learn: 4.2999525	test: 4.5194700	best: 4.5194700 (107)	total: 1m 2s	remaining: 9m 32s
+108:	learn: 4.2992996	test: 4.5190112	best: 4.5190112 (108)	total: 1m 2s	remaining: 9m 31s
+109:	learn: 4.2987569	test: 4.5184493	best: 4.5184493 (109)	total: 1m 3s	remaining: 9m 30s
+110:	learn: 4.2983437	test: 4.5179242	best: 4.5179242 (110)	total: 1m 4s	remaining: 9m 31s
+111:	learn: 4.2978588	test: 4.5172737	best: 4.5172737 (111)	total: 1m 4s	remaining: 9m 30s
+112:	learn: 4.2974903	test: 4.5169264	best: 4.5169264 (112)	total: 1m 5s	remaining: 9m 29s
+113:	learn: 4.2969621	test: 4.5162769	best: 4.5162769 (113)	total: 1m 5s	remaining: 9m 28s
+114:	learn: 4.2966255	test: 4.5158633	best: 4.5158633 (114)	total: 1m 6s	remaining: 9m 28s
+115:	learn: 4.2962079	test: 4.5154031	best: 4.5154031 (115)	total: 1m 6s	remaining: 9m 28s
+116:	learn: 4.2956369	test: 4.5148558	best: 4.5148558 (116)	total: 1m 7s	remaining: 9m 27s
+117:	learn: 4.2952082	test: 4.5142726	best: 4.5142726 (117)	total: 1m 8s	remaining: 9m 27s
+118:	learn: 4.2947166	test: 4.5137228	best: 4.5137228 (118)	total: 1m 8s	remaining: 9m 26s
+119:	learn: 4.2942951	test: 4.5133790	best: 4.5133790 (119)	total: 1m 9s	remaining: 9m 26s
+120:	learn: 4.2939168	test: 4.5129264	best: 4.5129264 (120)	total: 1m 9s	remaining: 9m 25s
+121:	learn: 4.2930295	test: 4.5120541	best: 4.5120541 (121)	total: 1m 10s	remaining: 9m 24s
+122:	learn: 4.2926937	test: 4.5117171	best: 4.5117171 (122)	total: 1m 11s	remaining: 9m 24s
+123:	learn: 4.2923235	test: 4.5113415	best: 4.5113415 (123)	total: 1m 11s	remaining: 9m 24s
+124:	learn: 4.2921839	test: 4.5111630	best: 4.5111630 (124)	total: 1m 12s	remaining: 9m 24s
+125:	learn: 4.2914026	test: 4.5103983	best: 4.5103983 (125)	total: 1m 12s	remaining: 9m 24s
+126:	learn: 4.2910234	test: 4.5099229	best: 4.5099229 (126)	total: 1m 13s	remaining: 9m 23s
+127:	learn: 4.2906465	test: 4.5095894	best: 4.5095894 (127)	total: 1m 14s	remaining: 9m 22s
+128:	learn: 4.2902680	test: 4.5089809	best: 4.5089809 (128)	total: 1m 14s	remaining: 9m 21s
+129:	learn: 4.2898867	test: 4.5086222	best: 4.5086222 (129)	total: 1m 15s	remaining: 9m 20s
+130:	learn: 4.2894988	test: 4.5081605	best: 4.5081605 (130)	total: 1m 15s	remaining: 9m 20s
+131:	learn: 4.2890521	test: 4.5077272	best: 4.5077272 (131)	total: 1m 16s	remaining: 9m 19s
+132:	learn: 4.2887449	test: 4.5072940	best: 4.5072940 (132)	total: 1m 16s	remaining: 9m 18s
+133:	learn: 4.2884974	test: 4.5069713	best: 4.5069713 (133)	total: 1m 17s	remaining: 9m 17s
+134:	learn: 4.2880137	test: 4.5065879	best: 4.5065879 (134)	total: 1m 17s	remaining: 9m 17s
+135:	learn: 4.2878986	test: 4.5064737	best: 4.5064737 (135)	total: 1m 18s	remaining: 9m 17s
+136:	learn: 4.2874369	test: 4.5061297	best: 4.5061297 (136)	total: 1m 19s	remaining: 9m 16s
+137:	learn: 4.2867469	test: 4.5050686	best: 4.5050686 (137)	total: 1m 19s	remaining: 9m 16s
+138:	learn: 4.2863561	test: 4.5048170	best: 4.5048170 (138)	total: 1m 20s	remaining: 9m 15s
+139:	learn: 4.2858737	test: 4.5043435	best: 4.5043435 (139)	total: 1m 21s	remaining: 9m 15s
+140:	learn: 4.2855435	test: 4.5040735	best: 4.5040735 (140)	total: 1m 21s	remaining: 9m 13s
+141:	learn: 4.2851786	test: 4.5040243	best: 4.5040243 (141)	total: 1m 21s	remaining: 9m 12s
+142:	learn: 4.2847087	test: 4.5034796	best: 4.5034796 (142)	total: 1m 22s	remaining: 9m 12s
+143:	learn: 4.2843163	test: 4.5031757	best: 4.5031757 (143)	total: 1m 23s	remaining: 9m 11s
+144:	learn: 4.2840136	test: 4.5028228	best: 4.5028228 (144)	total: 1m 23s	remaining: 9m 12s
+145:	learn: 4.2838215	test: 4.5025604	best: 4.5025604 (145)	total: 1m 24s	remaining: 9m 11s
+146:	learn: 4.2834921	test: 4.5022651	best: 4.5022651 (146)	total: 1m 24s	remaining: 9m 10s
+147:	learn: 4.2832043	test: 4.5019838	best: 4.5019838 (147)	total: 1m 25s	remaining: 9m 8s
+148:	learn: 4.2831105	test: 4.5019300	best: 4.5019300 (148)	total: 1m 25s	remaining: 9m 8s
+149:	learn: 4.2823879	test: 4.5014091	best: 4.5014091 (149)	total: 1m 26s	remaining: 9m 7s
+150:	learn: 4.2820685	test: 4.5010420	best: 4.5010420 (150)	total: 1m 26s	remaining: 9m 6s
+151:	learn: 4.2818595	test: 4.5008285	best: 4.5008285 (151)	total: 1m 27s	remaining: 9m 5s
+152:	learn: 4.2815292	test: 4.5004606	best: 4.5004606 (152)	total: 1m 28s	remaining: 9m 5s
+153:	learn: 4.2812885	test: 4.5002165	best: 4.5002165 (153)	total: 1m 28s	remaining: 9m 4s
+154:	learn: 4.2809631	test: 4.4998196	best: 4.4998196 (154)	total: 1m 29s	remaining: 9m 4s
+155:	learn: 4.2805577	test: 4.4994152	best: 4.4994152 (155)	total: 1m 29s	remaining: 9m 3s
+156:	learn: 4.2800636	test: 4.4987872	best: 4.4987872 (156)	total: 1m 30s	remaining: 9m 2s
+157:	learn: 4.2797818	test: 4.4985458	best: 4.4985458 (157)	total: 1m 30s	remaining: 9m 1s
+158:	learn: 4.2795330	test: 4.4982556	best: 4.4982556 (158)	total: 1m 31s	remaining: 9m 2s
+159:	learn: 4.2790400	test: 4.4975771	best: 4.4975771 (159)	total: 1m 32s	remaining: 9m 2s
+160:	learn: 4.2788060	test: 4.4972643	best: 4.4972643 (160)	total: 1m 33s	remaining: 9m 3s
+161:	learn: 4.2785150	test: 4.4968869	best: 4.4968869 (161)	total: 1m 33s	remaining: 9m 3s
+162:	learn: 4.2784441	test: 4.4968507	best: 4.4968507 (162)	total: 1m 34s	remaining: 9m 3s
+163:	learn: 4.2781716	test: 4.4964320	best: 4.4964320 (163)	total: 1m 35s	remaining: 9m 2s
+164:	learn: 4.2777092	test: 4.4960812	best: 4.4960812 (164)	total: 1m 35s	remaining: 9m 2s
+165:	learn: 4.2775589	test: 4.4959454	best: 4.4959454 (165)	total: 1m 36s	remaining: 9m 1s
+166:	learn: 4.2773182	test: 4.4957210	best: 4.4957210 (166)	total: 1m 36s	remaining: 9m
+167:	learn: 4.2770453	test: 4.4955651	best: 4.4955651 (167)	total: 1m 37s	remaining: 9m
+168:	learn: 4.2767997	test: 4.4953613	best: 4.4953613 (168)	total: 1m 37s	remaining: 8m 59s
+169:	learn: 4.2766429	test: 4.4951854	best: 4.4951854 (169)	total: 1m 38s	remaining: 8m 59s
+170:	learn: 4.2763837	test: 4.4948512	best: 4.4948512 (170)	total: 1m 39s	remaining: 8m 59s
+171:	learn: 4.2761035	test: 4.4946336	best: 4.4946336 (171)	total: 1m 39s	remaining: 8m 58s
+172:	learn: 4.2759275	test: 4.4944374	best: 4.4944374 (172)	total: 1m 40s	remaining: 8m 57s
+173:	learn: 4.2756852	test: 4.4941203	best: 4.4941203 (173)	total: 1m 40s	remaining: 8m 57s
+174:	learn: 4.2755823	test: 4.4940116	best: 4.4940116 (174)	total: 1m 41s	remaining: 8m 56s
+175:	learn: 4.2753598	test: 4.4937258	best: 4.4937258 (175)	total: 1m 42s	remaining: 8m 55s
+176:	learn: 4.2749731	test: 4.4935137	best: 4.4935137 (176)	total: 1m 42s	remaining: 8m 54s
+177:	learn: 4.2747557	test: 4.4933080	best: 4.4933080 (177)	total: 1m 43s	remaining: 8m 54s
+178:	learn: 4.2745147	test: 4.4929612	best: 4.4929612 (178)	total: 1m 43s	remaining: 8m 54s
+179:	learn: 4.2741874	test: 4.4925723	best: 4.4925723 (179)	total: 1m 44s	remaining: 8m 53s
+180:	learn: 4.2736951	test: 4.4922968	best: 4.4922968 (180)	total: 1m 44s	remaining: 8m 52s
+181:	learn: 4.2735867	test: 4.4921823	best: 4.4921823 (181)	total: 1m 45s	remaining: 8m 52s
+182:	learn: 4.2733752	test: 4.4919611	best: 4.4919611 (182)	total: 1m 46s	remaining: 8m 52s
+183:	learn: 4.2732208	test: 4.4918318	best: 4.4918318 (183)	total: 1m 46s	remaining: 8m 51s
+184:	learn: 4.2729449	test: 4.4916067	best: 4.4916067 (184)	total: 1m 47s	remaining: 8m 50s
+185:	learn: 4.2727149	test: 4.4914636	best: 4.4914636 (185)	total: 1m 48s	remaining: 8m 51s
+186:	learn: 4.2720422	test: 4.4907762	best: 4.4907762 (186)	total: 1m 48s	remaining: 8m 50s
+187:	learn: 4.2717781	test: 4.4905587	best: 4.4905587 (187)	total: 1m 49s	remaining: 8m 49s
+188:	learn: 4.2715824	test: 4.4903636	best: 4.4903636 (188)	total: 1m 49s	remaining: 8m 47s
+189:	learn: 4.2713581	test: 4.4901806	best: 4.4901806 (189)	total: 1m 50s	remaining: 8m 47s
+190:	learn: 4.2710676	test: 4.4898981	best: 4.4898981 (190)	total: 1m 50s	remaining: 8m 47s
+191:	learn: 4.2708950	test: 4.4897858	best: 4.4897858 (191)	total: 1m 51s	remaining: 8m 47s
+192:	learn: 4.2707858	test: 4.4896730	best: 4.4896730 (192)	total: 1m 52s	remaining: 8m 47s
+193:	learn: 4.2704182	test: 4.4893706	best: 4.4893706 (193)	total: 1m 52s	remaining: 8m 46s
+194:	learn: 4.2700478	test: 4.4889751	best: 4.4889751 (194)	total: 1m 53s	remaining: 8m 45s
+195:	learn: 4.2698475	test: 4.4887561	best: 4.4887561 (195)	total: 1m 53s	remaining: 8m 45s
+196:	learn: 4.2697158	test: 4.4886597	best: 4.4886597 (196)	total: 1m 54s	remaining: 8m 45s
+197:	learn: 4.2694359	test: 4.4884325	best: 4.4884325 (197)	total: 1m 55s	remaining: 8m 44s
+198:	learn: 4.2692552	test: 4.4883139	best: 4.4883139 (198)	total: 1m 55s	remaining: 8m 44s
+199:	learn: 4.2691432	test: 4.4882507	best: 4.4882507 (199)	total: 1m 56s	remaining: 8m 43s
+200:	learn: 4.2690072	test: 4.4880891	best: 4.4880891 (200)	total: 1m 56s	remaining: 8m 42s
+201:	learn: 4.2688808	test: 4.4879515	best: 4.4879515 (201)	total: 1m 57s	remaining: 8m 42s
+202:	learn: 4.2687083	test: 4.4877607	best: 4.4877607 (202)	total: 1m 58s	remaining: 8m 41s
+203:	learn: 4.2685088	test: 4.4876320	best: 4.4876320 (203)	total: 1m 58s	remaining: 8m 40s
+204:	learn: 4.2682877	test: 4.4875862	best: 4.4875862 (204)	total: 1m 59s	remaining: 8m 40s
+205:	learn: 4.2680324	test: 4.4873769	best: 4.4873769 (205)	total: 1m 59s	remaining: 8m 39s
+206:	learn: 4.2675609	test: 4.4869555	best: 4.4869555 (206)	total: 2m	remaining: 8m 38s
+207:	learn: 4.2674771	test: 4.4869250	best: 4.4869250 (207)	total: 2m 1s	remaining: 8m 39s
+208:	learn: 4.2672686	test: 4.4867557	best: 4.4867557 (208)	total: 2m 1s	remaining: 8m 38s
+209:	learn: 4.2671197	test: 4.4866493	best: 4.4866493 (209)	total: 2m 2s	remaining: 8m 37s
+210:	learn: 4.2669184	test: 4.4864074	best: 4.4864074 (210)	total: 2m 2s	remaining: 8m 37s
+211:	learn: 4.2667138	test: 4.4862456	best: 4.4862456 (211)	total: 2m 3s	remaining: 8m 37s
+212:	learn: 4.2665340	test: 4.4861086	best: 4.4861086 (212)	total: 2m 4s	remaining: 8m 37s
+213:	learn: 4.2663870	test: 4.4859448	best: 4.4859448 (213)	total: 2m 4s	remaining: 8m 37s
+214:	learn: 4.2662130	test: 4.4857954	best: 4.4857954 (214)	total: 2m 5s	remaining: 8m 37s
+215:	learn: 4.2659707	test: 4.4856956	best: 4.4856956 (215)	total: 2m 6s	remaining: 8m 36s
+216:	learn: 4.2658391	test: 4.4855502	best: 4.4855502 (216)	total: 2m 6s	remaining: 8m 35s
+217:	learn: 4.2656314	test: 4.4853654	best: 4.4853654 (217)	total: 2m 7s	remaining: 8m 35s
+218:	learn: 4.2655004	test: 4.4852500	best: 4.4852500 (218)	total: 2m 7s	remaining: 8m 34s
+219:	learn: 4.2649933	test: 4.4849320	best: 4.4849320 (219)	total: 2m 8s	remaining: 8m 34s
+220:	learn: 4.2648910	test: 4.4848410	best: 4.4848410 (220)	total: 2m 9s	remaining: 8m 34s
+221:	learn: 4.2647002	test: 4.4846116	best: 4.4846116 (221)	total: 2m 9s	remaining: 8m 33s
+222:	learn: 4.2646647	test: 4.4845973	best: 4.4845973 (222)	total: 2m 10s	remaining: 8m 32s
+223:	learn: 4.2645139	test: 4.4844118	best: 4.4844118 (223)	total: 2m 10s	remaining: 8m 32s
+224:	learn: 4.2643496	test: 4.4842099	best: 4.4842099 (224)	total: 2m 11s	remaining: 8m 31s
+225:	learn: 4.2641786	test: 4.4841699	best: 4.4841699 (225)	total: 2m 11s	remaining: 8m 30s
+226:	learn: 4.2639771	test: 4.4841031	best: 4.4841031 (226)	total: 2m 12s	remaining: 8m 29s
+227:	learn: 4.2637432	test: 4.4837305	best: 4.4837305 (227)	total: 2m 13s	remaining: 8m 29s
+228:	learn: 4.2635145	test: 4.4836857	best: 4.4836857 (228)	total: 2m 14s	remaining: 8m 29s
+229:	learn: 4.2627848	test: 4.4830240	best: 4.4830240 (229)	total: 2m 14s	remaining: 8m 29s
+230:	learn: 4.2625948	test: 4.4828869	best: 4.4828869 (230)	total: 2m 15s	remaining: 8m 28s
+231:	learn: 4.2624704	test: 4.4826401	best: 4.4826401 (231)	total: 2m 15s	remaining: 8m 28s
+232:	learn: 4.2622483	test: 4.4823597	best: 4.4823597 (232)	total: 2m 16s	remaining: 8m 27s
+233:	learn: 4.2618294	test: 4.4819942	best: 4.4819942 (233)	total: 2m 17s	remaining: 8m 27s
+234:	learn: 4.2616943	test: 4.4819976	best: 4.4819942 (233)	total: 2m 17s	remaining: 8m 26s
+235:	learn: 4.2615725	test: 4.4818809	best: 4.4818809 (235)	total: 2m 18s	remaining: 8m 25s
+236:	learn: 4.2611153	test: 4.4816570	best: 4.4816570 (236)	total: 2m 18s	remaining: 8m 25s
+237:	learn: 4.2609004	test: 4.4814751	best: 4.4814751 (237)	total: 2m 19s	remaining: 8m 25s
+238:	learn: 4.2606090	test: 4.4813150	best: 4.4813150 (238)	total: 2m 19s	remaining: 8m 24s
+239:	learn: 4.2604995	test: 4.4812151	best: 4.4812151 (239)	total: 2m 20s	remaining: 8m 23s
+240:	learn: 4.2603601	test: 4.4811426	best: 4.4811426 (240)	total: 2m 21s	remaining: 8m 23s
+241:	learn: 4.2601279	test: 4.4810305	best: 4.4810305 (241)	total: 2m 21s	remaining: 8m 22s
+242:	learn: 4.2599985	test: 4.4809415	best: 4.4809415 (242)	total: 2m 22s	remaining: 8m 22s
+243:	learn: 4.2598823	test: 4.4808039	best: 4.4808039 (243)	total: 2m 22s	remaining: 8m 21s
+244:	learn: 4.2596996	test: 4.4806282	best: 4.4806282 (244)	total: 2m 23s	remaining: 8m 20s
+245:	learn: 4.2594016	test: 4.4804199	best: 4.4804199 (245)	total: 2m 23s	remaining: 8m 19s
+246:	learn: 4.2593457	test: 4.4804019	best: 4.4804019 (246)	total: 2m 24s	remaining: 8m 19s
+247:	learn: 4.2589856	test: 4.4802280	best: 4.4802280 (247)	total: 2m 25s	remaining: 8m 18s
+248:	learn: 4.2587384	test: 4.4798917	best: 4.4798917 (248)	total: 2m 25s	remaining: 8m 17s
+249:	learn: 4.2585592	test: 4.4799601	best: 4.4798917 (248)	total: 2m 26s	remaining: 8m 16s
+250:	learn: 4.2584263	test: 4.4798929	best: 4.4798917 (248)	total: 2m 26s	remaining: 8m 16s
+251:	learn: 4.2583223	test: 4.4798041	best: 4.4798041 (251)	total: 2m 27s	remaining: 8m 15s
+252:	learn: 4.2581739	test: 4.4796442	best: 4.4796442 (252)	total: 2m 27s	remaining: 8m 14s
+253:	learn: 4.2579831	test: 4.4794412	best: 4.4794412 (253)	total: 2m 28s	remaining: 8m 13s
+254:	learn: 4.2579278	test: 4.4793929	best: 4.4793929 (254)	total: 2m 29s	remaining: 8m 14s
+255:	learn: 4.2577564	test: 4.4792400	best: 4.4792400 (255)	total: 2m 29s	remaining: 8m 13s
+256:	learn: 4.2575340	test: 4.4790198	best: 4.4790198 (256)	total: 2m 30s	remaining: 8m 12s
+257:	learn: 4.2573875	test: 4.4788727	best: 4.4788727 (257)	total: 2m 30s	remaining: 8m 11s
+258:	learn: 4.2572651	test: 4.4786854	best: 4.4786854 (258)	total: 2m 31s	remaining: 8m 10s
+259:	learn: 4.2570689	test: 4.4785587	best: 4.4785587 (259)	total: 2m 31s	remaining: 8m 9s
+260:	learn: 4.2568586	test: 4.4784244	best: 4.4784244 (260)	total: 2m 32s	remaining: 8m 8s
+261:	learn: 4.2566530	test: 4.4782621	best: 4.4782621 (261)	total: 2m 32s	remaining: 8m 8s
+262:	learn: 4.2565039	test: 4.4781838	best: 4.4781838 (262)	total: 2m 33s	remaining: 8m 8s
+263:	learn: 4.2564034	test: 4.4780822	best: 4.4780822 (263)	total: 2m 34s	remaining: 8m 8s
+264:	learn: 4.2562931	test: 4.4779794	best: 4.4779794 (264)	total: 2m 34s	remaining: 8m 7s
+265:	learn: 4.2561793	test: 4.4778464	best: 4.4778464 (265)	total: 2m 35s	remaining: 8m 7s
+266:	learn: 4.2560399	test: 4.4776880	best: 4.4776880 (266)	total: 2m 35s	remaining: 8m 6s
+267:	learn: 4.2557849	test: 4.4774663	best: 4.4774663 (267)	total: 2m 36s	remaining: 8m 6s
+268:	learn: 4.2555955	test: 4.4773651	best: 4.4773651 (268)	total: 2m 37s	remaining: 8m 5s
+269:	learn: 4.2554949	test: 4.4772942	best: 4.4772942 (269)	total: 2m 37s	remaining: 8m 5s
+270:	learn: 4.2554185	test: 4.4772383	best: 4.4772383 (270)	total: 2m 38s	remaining: 8m 5s
+271:	learn: 4.2552319	test: 4.4771309	best: 4.4771309 (271)	total: 2m 39s	remaining: 8m 4s
+272:	learn: 4.2552015	test: 4.4771093	best: 4.4771093 (272)	total: 2m 39s	remaining: 8m 3s
+273:	learn: 4.2550598	test: 4.4769871	best: 4.4769871 (273)	total: 2m 40s	remaining: 8m 2s
+274:	learn: 4.2549297	test: 4.4768790	best: 4.4768790 (274)	total: 2m 40s	remaining: 8m 2s
+275:	learn: 4.2548545	test: 4.4768194	best: 4.4768194 (275)	total: 2m 41s	remaining: 8m 2s
+276:	learn: 4.2546560	test: 4.4765710	best: 4.4765710 (276)	total: 2m 42s	remaining: 8m 2s
+277:	learn: 4.2545152	test: 4.4764728	best: 4.4764728 (277)	total: 2m 42s	remaining: 8m 1s
+278:	learn: 4.2544526	test: 4.4764336	best: 4.4764336 (278)	total: 2m 43s	remaining: 8m 1s
+279:	learn: 4.2543330	test: 4.4762498	best: 4.4762498 (279)	total: 2m 44s	remaining: 8m
+280:	learn: 4.2542042	test: 4.4761380	best: 4.4761380 (280)	total: 2m 44s	remaining: 7m 59s
+281:	learn: 4.2541188	test: 4.4761097	best: 4.4761097 (281)	total: 2m 45s	remaining: 7m 59s
+282:	learn: 4.2539954	test: 4.4759453	best: 4.4759453 (282)	total: 2m 45s	remaining: 7m 59s
+283:	learn: 4.2538398	test: 4.4758206	best: 4.4758206 (283)	total: 2m 46s	remaining: 7m 58s
+284:	learn: 4.2536185	test: 4.4755831	best: 4.4755831 (284)	total: 2m 47s	remaining: 7m 57s
+285:	learn: 4.2535388	test: 4.4755175	best: 4.4755175 (285)	total: 2m 47s	remaining: 7m 57s
+286:	learn: 4.2534243	test: 4.4754476	best: 4.4754476 (286)	total: 2m 48s	remaining: 7m 56s
+287:	learn: 4.2533307	test: 4.4753501	best: 4.4753501 (287)	total: 2m 48s	remaining: 7m 56s
+288:	learn: 4.2532809	test: 4.4752429	best: 4.4752429 (288)	total: 2m 49s	remaining: 7m 56s
+289:	learn: 4.2532139	test: 4.4752669	best: 4.4752429 (288)	total: 2m 50s	remaining: 7m 55s
+290:	learn: 4.2531667	test: 4.4752478	best: 4.4752429 (288)	total: 2m 50s	remaining: 7m 54s
+291:	learn: 4.2530594	test: 4.4752371	best: 4.4752371 (291)	total: 2m 51s	remaining: 7m 54s
+292:	learn: 4.2529755	test: 4.4752043	best: 4.4752043 (292)	total: 2m 51s	remaining: 7m 53s
+293:	learn: 4.2527043	test: 4.4750674	best: 4.4750674 (293)	total: 2m 52s	remaining: 7m 52s
+294:	learn: 4.2524136	test: 4.4749222	best: 4.4749222 (294)	total: 2m 52s	remaining: 7m 51s
+295:	learn: 4.2521801	test: 4.4747345	best: 4.4747345 (295)	total: 2m 53s	remaining: 7m 51s
+296:	learn: 4.2520435	test: 4.4746422	best: 4.4746422 (296)	total: 2m 53s	remaining: 7m 50s
+297:	learn: 4.2519270	test: 4.4745614	best: 4.4745614 (297)	total: 2m 54s	remaining: 7m 49s
+298:	learn: 4.2516504	test: 4.4743645	best: 4.4743645 (298)	total: 2m 54s	remaining: 7m 48s
+299:	learn: 4.2515901	test: 4.4742975	best: 4.4742975 (299)	total: 2m 55s	remaining: 7m 48s
+300:	learn: 4.2515205	test: 4.4742766	best: 4.4742766 (300)	total: 2m 56s	remaining: 7m 47s
+301:	learn: 4.2512835	test: 4.4740973	best: 4.4740973 (301)	total: 2m 56s	remaining: 7m 47s
+302:	learn: 4.2511382	test: 4.4739572	best: 4.4739572 (302)	total: 2m 57s	remaining: 7m 46s
+303:	learn: 4.2510793	test: 4.4738939	best: 4.4738939 (303)	total: 2m 57s	remaining: 7m 45s
+304:	learn: 4.2510723	test: 4.4738942	best: 4.4738939 (303)	total: 2m 58s	remaining: 7m 45s
+305:	learn: 4.2509759	test: 4.4737929	best: 4.4737929 (305)	total: 2m 59s	remaining: 7m 45s
+306:	learn: 4.2509269	test: 4.4737641	best: 4.4737641 (306)	total: 2m 59s	remaining: 7m 44s
+307:	learn: 4.2508111	test: 4.4736688	best: 4.4736688 (307)	total: 3m	remaining: 7m 44s
+308:	learn: 4.2507557	test: 4.4736350	best: 4.4736350 (308)	total: 3m 1s	remaining: 7m 43s
+309:	learn: 4.2506593	test: 4.4735844	best: 4.4735844 (309)	total: 3m 1s	remaining: 7m 43s
+310:	learn: 4.2505421	test: 4.4735236	best: 4.4735236 (310)	total: 3m 2s	remaining: 7m 42s
+311:	learn: 4.2504286	test: 4.4735456	best: 4.4735236 (310)	total: 3m 2s	remaining: 7m 41s
+312:	learn: 4.2502629	test: 4.4734575	best: 4.4734575 (312)	total: 3m 3s	remaining: 7m 41s
+313:	learn: 4.2501621	test: 4.4733392	best: 4.4733392 (313)	total: 3m 4s	remaining: 7m 40s
+314:	learn: 4.2500572	test: 4.4732214	best: 4.4732214 (314)	total: 3m 4s	remaining: 7m 40s
+315:	learn: 4.2498431	test: 4.4728864	best: 4.4728864 (315)	total: 3m 5s	remaining: 7m 40s
+316:	learn: 4.2496258	test: 4.4727280	best: 4.4727280 (316)	total: 3m 6s	remaining: 7m 39s
+317:	learn: 4.2495798	test: 4.4727335	best: 4.4727280 (316)	total: 3m 6s	remaining: 7m 39s
+318:	learn: 4.2494475	test: 4.4726545	best: 4.4726545 (318)	total: 3m 7s	remaining: 7m 38s
+319:	learn: 4.2493015	test: 4.4723576	best: 4.4723576 (319)	total: 3m 7s	remaining: 7m 38s
+320:	learn: 4.2491964	test: 4.4722911	best: 4.4722911 (320)	total: 3m 8s	remaining: 7m 37s
+321:	learn: 4.2491443	test: 4.4721891	best: 4.4721891 (321)	total: 3m 9s	remaining: 7m 36s
+322:	learn: 4.2489849	test: 4.4720520	best: 4.4720520 (322)	total: 3m 9s	remaining: 7m 36s
+323:	learn: 4.2488419	test: 4.4718847	best: 4.4718847 (323)	total: 3m 10s	remaining: 7m 35s
+324:	learn: 4.2487559	test: 4.4717303	best: 4.4717303 (324)	total: 3m 10s	remaining: 7m 35s
+325:	learn: 4.2486717	test: 4.4716756	best: 4.4716756 (325)	total: 3m 11s	remaining: 7m 34s
+326:	learn: 4.2486065	test: 4.4716497	best: 4.4716497 (326)	total: 3m 12s	remaining: 7m 34s
+327:	learn: 4.2484964	test: 4.4715623	best: 4.4715623 (327)	total: 3m 12s	remaining: 7m 34s
+328:	learn: 4.2483986	test: 4.4715174	best: 4.4715174 (328)	total: 3m 13s	remaining: 7m 33s
+329:	learn: 4.2483908	test: 4.4715134	best: 4.4715134 (329)	total: 3m 14s	remaining: 7m 33s
+330:	learn: 4.2482665	test: 4.4714173	best: 4.4714173 (330)	total: 3m 15s	remaining: 7m 33s
+331:	learn: 4.2481640	test: 4.4713697	best: 4.4713697 (331)	total: 3m 15s	remaining: 7m 33s
+332:	learn: 4.2478808	test: 4.4708725	best: 4.4708725 (332)	total: 3m 16s	remaining: 7m 32s
+333:	learn: 4.2477984	test: 4.4708083	best: 4.4708083 (333)	total: 3m 16s	remaining: 7m 31s
+334:	learn: 4.2476726	test: 4.4707584	best: 4.4707584 (334)	total: 3m 17s	remaining: 7m 31s
+335:	learn: 4.2474332	test: 4.4704756	best: 4.4704756 (335)	total: 3m 18s	remaining: 7m 30s
+336:	learn: 4.2473930	test: 4.4704666	best: 4.4704666 (336)	total: 3m 18s	remaining: 7m 29s
+337:	learn: 4.2472796	test: 4.4703496	best: 4.4703496 (337)	total: 3m 19s	remaining: 7m 29s
+338:	learn: 4.2472032	test: 4.4703021	best: 4.4703021 (338)	total: 3m 19s	remaining: 7m 28s
+339:	learn: 4.2470562	test: 4.4702542	best: 4.4702542 (339)	total: 3m 20s	remaining: 7m 28s
+340:	learn: 4.2469959	test: 4.4702219	best: 4.4702219 (340)	total: 3m 21s	remaining: 7m 27s
+341:	learn: 4.2469126	test: 4.4701532	best: 4.4701532 (341)	total: 3m 21s	remaining: 7m 26s
+342:	learn: 4.2467997	test: 4.4700542	best: 4.4700542 (342)	total: 3m 22s	remaining: 7m 26s
+343:	learn: 4.2467125	test: 4.4700171	best: 4.4700171 (343)	total: 3m 23s	remaining: 7m 26s
+344:	learn: 4.2466672	test: 4.4699592	best: 4.4699592 (344)	total: 3m 23s	remaining: 7m 25s
+345:	learn: 4.2465415	test: 4.4698160	best: 4.4698160 (345)	total: 3m 24s	remaining: 7m 25s
+346:	learn: 4.2464790	test: 4.4696856	best: 4.4696856 (346)	total: 3m 24s	remaining: 7m 24s
+347:	learn: 4.2464322	test: 4.4696329	best: 4.4696329 (347)	total: 3m 25s	remaining: 7m 23s
+348:	learn: 4.2464173	test: 4.4696107	best: 4.4696107 (348)	total: 3m 25s	remaining: 7m 23s
+349:	learn: 4.2462473	test: 4.4695151	best: 4.4695151 (349)	total: 3m 26s	remaining: 7m 22s
+350:	learn: 4.2461753	test: 4.4694538	best: 4.4694538 (350)	total: 3m 27s	remaining: 7m 22s
+351:	learn: 4.2461169	test: 4.4693909	best: 4.4693909 (351)	total: 3m 27s	remaining: 7m 21s
+352:	learn: 4.2460631	test: 4.4693720	best: 4.4693720 (352)	total: 3m 28s	remaining: 7m 20s
+353:	learn: 4.2460234	test: 4.4693815	best: 4.4693720 (352)	total: 3m 28s	remaining: 7m 20s
+354:	learn: 4.2459304	test: 4.4693787	best: 4.4693720 (352)	total: 3m 29s	remaining: 7m 19s
+355:	learn: 4.2457484	test: 4.4692417	best: 4.4692417 (355)	total: 3m 29s	remaining: 7m 18s
+356:	learn: 4.2456546	test: 4.4691503	best: 4.4691503 (356)	total: 3m 30s	remaining: 7m 18s
+357:	learn: 4.2454891	test: 4.4691455	best: 4.4691455 (357)	total: 3m 30s	remaining: 7m 17s
+358:	learn: 4.2454121	test: 4.4690880	best: 4.4690880 (358)	total: 3m 31s	remaining: 7m 16s
+359:	learn: 4.2453862	test: 4.4690543	best: 4.4690543 (359)	total: 3m 32s	remaining: 7m 16s
+360:	learn: 4.2453438	test: 4.4690177	best: 4.4690177 (360)	total: 3m 32s	remaining: 7m 15s
+361:	learn: 4.2452380	test: 4.4689625	best: 4.4689625 (361)	total: 3m 33s	remaining: 7m 14s
+362:	learn: 4.2451182	test: 4.4688638	best: 4.4688638 (362)	total: 3m 34s	remaining: 7m 14s
+363:	learn: 4.2449386	test: 4.4688883	best: 4.4688638 (362)	total: 3m 34s	remaining: 7m 14s
+364:	learn: 4.2447167	test: 4.4686982	best: 4.4686982 (364)	total: 3m 35s	remaining: 7m 13s
+365:	learn: 4.2445466	test: 4.4684126	best: 4.4684126 (365)	total: 3m 36s	remaining: 7m 13s
+366:	learn: 4.2444314	test: 4.4683038	best: 4.4683038 (366)	total: 3m 36s	remaining: 7m 12s
+367:	learn: 4.2443330	test: 4.4682439	best: 4.4682439 (367)	total: 3m 37s	remaining: 7m 12s
+368:	learn: 4.2442896	test: 4.4682200	best: 4.4682200 (368)	total: 3m 37s	remaining: 7m 11s
+369:	learn: 4.2439494	test: 4.4678756	best: 4.4678756 (369)	total: 3m 38s	remaining: 7m 10s
+370:	learn: 4.2437172	test: 4.4677570	best: 4.4677570 (370)	total: 3m 38s	remaining: 7m 9s
+371:	learn: 4.2436278	test: 4.4676487	best: 4.4676487 (371)	total: 3m 39s	remaining: 7m 9s
+372:	learn: 4.2435490	test: 4.4676092	best: 4.4676092 (372)	total: 3m 39s	remaining: 7m 8s
+373:	learn: 4.2434476	test: 4.4674682	best: 4.4674682 (373)	total: 3m 40s	remaining: 7m 7s
+374:	learn: 4.2434363	test: 4.4674610	best: 4.4674610 (374)	total: 3m 40s	remaining: 7m 7s
+375:	learn: 4.2432283	test: 4.4671207	best: 4.4671207 (375)	total: 3m 41s	remaining: 7m 6s
+376:	learn: 4.2431016	test: 4.4671071	best: 4.4671071 (376)	total: 3m 41s	remaining: 7m 5s
+377:	learn: 4.2430731	test: 4.4670763	best: 4.4670763 (377)	total: 3m 42s	remaining: 7m 4s
+378:	learn: 4.2429788	test: 4.4669955	best: 4.4669955 (378)	total: 3m 42s	remaining: 7m 4s
+379:	learn: 4.2428412	test: 4.4669186	best: 4.4669186 (379)	total: 3m 43s	remaining: 7m 3s
+380:	learn: 4.2426767	test: 4.4667186	best: 4.4667186 (380)	total: 3m 44s	remaining: 7m 3s
+381:	learn: 4.2426221	test: 4.4666326	best: 4.4666326 (381)	total: 3m 45s	remaining: 7m 3s
+382:	learn: 4.2425745	test: 4.4666033	best: 4.4666033 (382)	total: 3m 45s	remaining: 7m 2s
+383:	learn: 4.2425594	test: 4.4665994	best: 4.4665994 (383)	total: 3m 46s	remaining: 7m 1s
+384:	learn: 4.2424136	test: 4.4665032	best: 4.4665032 (384)	total: 3m 46s	remaining: 7m 1s
+385:	learn: 4.2423103	test: 4.4664217	best: 4.4664217 (385)	total: 3m 47s	remaining: 7m
+386:	learn: 4.2421782	test: 4.4663516	best: 4.4663516 (386)	total: 3m 47s	remaining: 6m 59s
+387:	learn: 4.2420712	test: 4.4662783	best: 4.4662783 (387)	total: 3m 48s	remaining: 6m 59s
+388:	learn: 4.2416318	test: 4.4658471	best: 4.4658471 (388)	total: 3m 49s	remaining: 6m 58s
+389:	learn: 4.2415736	test: 4.4658128	best: 4.4658128 (389)	total: 3m 49s	remaining: 6m 57s
+390:	learn: 4.2414795	test: 4.4658153	best: 4.4658128 (389)	total: 3m 50s	remaining: 6m 57s
+391:	learn: 4.2414050	test: 4.4657487	best: 4.4657487 (391)	total: 3m 50s	remaining: 6m 56s
+392:	learn: 4.2413548	test: 4.4657086	best: 4.4657086 (392)	total: 3m 51s	remaining: 6m 56s
+393:	learn: 4.2412534	test: 4.4655879	best: 4.4655879 (393)	total: 3m 51s	remaining: 6m 55s
+394:	learn: 4.2410441	test: 4.4655702	best: 4.4655702 (394)	total: 3m 52s	remaining: 6m 54s
+395:	learn: 4.2409663	test: 4.4654952	best: 4.4654952 (395)	total: 3m 53s	remaining: 6m 54s
+396:	learn: 4.2409162	test: 4.4654602	best: 4.4654602 (396)	total: 3m 53s	remaining: 6m 53s
+397:	learn: 4.2407020	test: 4.4653221	best: 4.4653221 (397)	total: 3m 54s	remaining: 6m 53s
+398:	learn: 4.2405933	test: 4.4653339	best: 4.4653221 (397)	total: 3m 54s	remaining: 6m 52s
+399:	learn: 4.2404032	test: 4.4650403	best: 4.4650403 (399)	total: 3m 55s	remaining: 6m 52s
+400:	learn: 4.2401910	test: 4.4647683	best: 4.4647683 (400)	total: 3m 55s	remaining: 6m 51s
+401:	learn: 4.2400939	test: 4.4646764	best: 4.4646764 (401)	total: 3m 56s	remaining: 6m 50s
+402:	learn: 4.2399578	test: 4.4645196	best: 4.4645196 (402)	total: 3m 57s	remaining: 6m 49s
+403:	learn: 4.2399298	test: 4.4644957	best: 4.4644957 (403)	total: 3m 57s	remaining: 6m 49s
+404:	learn: 4.2398769	test: 4.4644497	best: 4.4644497 (404)	total: 3m 58s	remaining: 6m 49s
+405:	learn: 4.2397379	test: 4.4643315	best: 4.4643315 (405)	total: 3m 58s	remaining: 6m 48s
+406:	learn: 4.2395839	test: 4.4642926	best: 4.4642926 (406)	total: 3m 59s	remaining: 6m 48s
+407:	learn: 4.2394992	test: 4.4642277	best: 4.4642277 (407)	total: 4m	remaining: 6m 47s
+408:	learn: 4.2394004	test: 4.4640370	best: 4.4640370 (408)	total: 4m	remaining: 6m 46s
+409:	learn: 4.2392989	test: 4.4640221	best: 4.4640221 (409)	total: 4m 1s	remaining: 6m 46s
+410:	learn: 4.2391585	test: 4.4639196	best: 4.4639196 (410)	total: 4m 2s	remaining: 6m 45s
+411:	learn: 4.2391157	test: 4.4639007	best: 4.4639007 (411)	total: 4m 2s	remaining: 6m 45s
+412:	learn: 4.2390617	test: 4.4638765	best: 4.4638765 (412)	total: 4m 3s	remaining: 6m 44s
+413:	learn: 4.2389895	test: 4.4638027	best: 4.4638027 (413)	total: 4m 3s	remaining: 6m 44s
+414:	learn: 4.2389213	test: 4.4637628	best: 4.4637628 (414)	total: 4m 4s	remaining: 6m 43s
+415:	learn: 4.2389040	test: 4.4637553	best: 4.4637553 (415)	total: 4m 5s	remaining: 6m 43s
+416:	learn: 4.2388343	test: 4.4637141	best: 4.4637141 (416)	total: 4m 5s	remaining: 6m 42s
+417:	learn: 4.2387164	test: 4.4635636	best: 4.4635636 (417)	total: 4m 6s	remaining: 6m 41s
+418:	learn: 4.2385642	test: 4.4634698	best: 4.4634698 (418)	total: 4m 6s	remaining: 6m 40s
+419:	learn: 4.2384580	test: 4.4633933	best: 4.4633933 (419)	total: 4m 7s	remaining: 6m 40s
+420:	learn: 4.2383451	test: 4.4633358	best: 4.4633358 (420)	total: 4m 7s	remaining: 6m 39s
+421:	learn: 4.2383133	test: 4.4633316	best: 4.4633316 (421)	total: 4m 8s	remaining: 6m 39s
+422:	learn: 4.2382321	test: 4.4632846	best: 4.4632846 (422)	total: 4m 9s	remaining: 6m 38s
+423:	learn: 4.2381885	test: 4.4632547	best: 4.4632547 (423)	total: 4m 9s	remaining: 6m 37s
+424:	learn: 4.2380548	test: 4.4631259	best: 4.4631259 (424)	total: 4m 10s	remaining: 6m 37s
+425:	learn: 4.2379514	test: 4.4630737	best: 4.4630737 (425)	total: 4m 10s	remaining: 6m 36s
+426:	learn: 4.2378613	test: 4.4630184	best: 4.4630184 (426)	total: 4m 11s	remaining: 6m 35s
+427:	learn: 4.2377565	test: 4.4629281	best: 4.4629281 (427)	total: 4m 11s	remaining: 6m 35s
+428:	learn: 4.2374901	test: 4.4624868	best: 4.4624868 (428)	total: 4m 12s	remaining: 6m 34s
+429:	learn: 4.2374523	test: 4.4624572	best: 4.4624572 (429)	total: 4m 12s	remaining: 6m 34s
+430:	learn: 4.2373911	test: 4.4624451	best: 4.4624451 (430)	total: 4m 13s	remaining: 6m 33s
+431:	learn: 4.2372916	test: 4.4623306	best: 4.4623306 (431)	total: 4m 14s	remaining: 6m 32s
+432:	learn: 4.2372059	test: 4.4622566	best: 4.4622566 (432)	total: 4m 14s	remaining: 6m 32s
+433:	learn: 4.2371768	test: 4.4622606	best: 4.4622566 (432)	total: 4m 15s	remaining: 6m 31s
+434:	learn: 4.2370825	test: 4.4621722	best: 4.4621722 (434)	total: 4m 16s	remaining: 6m 31s
+435:	learn: 4.2370625	test: 4.4621598	best: 4.4621598 (435)	total: 4m 16s	remaining: 6m 31s
+436:	learn: 4.2370419	test: 4.4621417	best: 4.4621417 (436)	total: 4m 17s	remaining: 6m 30s
+437:	learn: 4.2369609	test: 4.4621368	best: 4.4621368 (437)	total: 4m 17s	remaining: 6m 29s
+438:	learn: 4.2368190	test: 4.4619845	best: 4.4619845 (438)	total: 4m 18s	remaining: 6m 29s
+439:	learn: 4.2367671	test: 4.4619901	best: 4.4619845 (438)	total: 4m 19s	remaining: 6m 28s
+440:	learn: 4.2366839	test: 4.4619377	best: 4.4619377 (440)	total: 4m 19s	remaining: 6m 28s
+441:	learn: 4.2366348	test: 4.4618971	best: 4.4618971 (441)	total: 4m 20s	remaining: 6m 27s
+442:	learn: 4.2366203	test: 4.4618876	best: 4.4618876 (442)	total: 4m 21s	remaining: 6m 27s
+443:	learn: 4.2365929	test: 4.4618749	best: 4.4618749 (443)	total: 4m 21s	remaining: 6m 26s
+444:	learn: 4.2364617	test: 4.4618665	best: 4.4618665 (444)	total: 4m 22s	remaining: 6m 26s
+445:	learn: 4.2363833	test: 4.4618723	best: 4.4618665 (444)	total: 4m 22s	remaining: 6m 25s
+446:	learn: 4.2362696	test: 4.4617935	best: 4.4617935 (446)	total: 4m 23s	remaining: 6m 24s
+447:	learn: 4.2361950	test: 4.4617259	best: 4.4617259 (447)	total: 4m 24s	remaining: 6m 24s
+448:	learn: 4.2360789	test: 4.4616480	best: 4.4616480 (448)	total: 4m 24s	remaining: 6m 24s
+449:	learn: 4.2359806	test: 4.4616491	best: 4.4616480 (448)	total: 4m 25s	remaining: 6m 23s
+450:	learn: 4.2358943	test: 4.4616458	best: 4.4616458 (450)	total: 4m 25s	remaining: 6m 22s
+451:	learn: 4.2358135	test: 4.4615257	best: 4.4615257 (451)	total: 4m 26s	remaining: 6m 22s
+452:	learn: 4.2357771	test: 4.4614894	best: 4.4614894 (452)	total: 4m 27s	remaining: 6m 21s
+453:	learn: 4.2356836	test: 4.4614473	best: 4.4614473 (453)	total: 4m 27s	remaining: 6m 21s
+454:	learn: 4.2356354	test: 4.4614040	best: 4.4614040 (454)	total: 4m 28s	remaining: 6m 20s
+455:	learn: 4.2356297	test: 4.4614037	best: 4.4614037 (455)	total: 4m 28s	remaining: 6m 19s
+456:	learn: 4.2355780	test: 4.4614037	best: 4.4614037 (455)	total: 4m 29s	remaining: 6m 19s
+457:	learn: 4.2354878	test: 4.4613966	best: 4.4613966 (457)	total: 4m 30s	remaining: 6m 18s
+458:	learn: 4.2354599	test: 4.4614046	best: 4.4613966 (457)	total: 4m 30s	remaining: 6m 18s
+459:	learn: 4.2353955	test: 4.4613575	best: 4.4613575 (459)	total: 4m 31s	remaining: 6m 17s
+460:	learn: 4.2353320	test: 4.4613098	best: 4.4613098 (460)	total: 4m 31s	remaining: 6m 16s
+461:	learn: 4.2352716	test: 4.4612730	best: 4.4612730 (461)	total: 4m 32s	remaining: 6m 16s
+462:	learn: 4.2351746	test: 4.4612227	best: 4.4612227 (462)	total: 4m 33s	remaining: 6m 15s
+463:	learn: 4.2351125	test: 4.4611710	best: 4.4611710 (463)	total: 4m 33s	remaining: 6m 14s
+464:	learn: 4.2350708	test: 4.4611384	best: 4.4611384 (464)	total: 4m 34s	remaining: 6m 14s
+465:	learn: 4.2349999	test: 4.4611157	best: 4.4611157 (465)	total: 4m 34s	remaining: 6m 13s
+466:	learn: 4.2348244	test: 4.4610418	best: 4.4610418 (466)	total: 4m 35s	remaining: 6m 13s
+467:	learn: 4.2347857	test: 4.4610702	best: 4.4610418 (466)	total: 4m 36s	remaining: 6m 12s
+468:	learn: 4.2347184	test: 4.4610102	best: 4.4610102 (468)	total: 4m 36s	remaining: 6m 12s
+469:	learn: 4.2346883	test: 4.4609814	best: 4.4609814 (469)	total: 4m 37s	remaining: 6m 11s
+470:	learn: 4.2345232	test: 4.4608491	best: 4.4608491 (470)	total: 4m 37s	remaining: 6m 10s
+471:	learn: 4.2344216	test: 4.4607543	best: 4.4607543 (471)	total: 4m 38s	remaining: 6m 10s
+472:	learn: 4.2344082	test: 4.4607467	best: 4.4607467 (472)	total: 4m 38s	remaining: 6m 9s
+473:	learn: 4.2343831	test: 4.4607400	best: 4.4607400 (473)	total: 4m 39s	remaining: 6m 8s
+474:	learn: 4.2343387	test: 4.4606954	best: 4.4606954 (474)	total: 4m 39s	remaining: 6m 8s
+475:	learn: 4.2343171	test: 4.4606819	best: 4.4606819 (475)	total: 4m 40s	remaining: 6m 7s
+476:	learn: 4.2342553	test: 4.4606226	best: 4.4606226 (476)	total: 4m 41s	remaining: 6m 7s
+477:	learn: 4.2341625	test: 4.4606036	best: 4.4606036 (477)	total: 4m 41s	remaining: 6m 6s
+478:	learn: 4.2340195	test: 4.4605608	best: 4.4605608 (478)	total: 4m 42s	remaining: 6m 5s
+479:	learn: 4.2339824	test: 4.4605255	best: 4.4605255 (479)	total: 4m 42s	remaining: 6m 5s
+480:	learn: 4.2339467	test: 4.4605282	best: 4.4605255 (479)	total: 4m 43s	remaining: 6m 4s
+481:	learn: 4.2337658	test: 4.4604582	best: 4.4604582 (481)	total: 4m 44s	remaining: 6m 4s
+482:	learn: 4.2337018	test: 4.4604043	best: 4.4604043 (482)	total: 4m 44s	remaining: 6m 3s
+483:	learn: 4.2336840	test: 4.4604005	best: 4.4604005 (483)	total: 4m 45s	remaining: 6m 3s
+484:	learn: 4.2336139	test: 4.4603073	best: 4.4603073 (484)	total: 4m 45s	remaining: 6m 2s
+485:	learn: 4.2334761	test: 4.4600995	best: 4.4600995 (485)	total: 4m 46s	remaining: 6m 1s
+486:	learn: 4.2333229	test: 4.4600147	best: 4.4600147 (486)	total: 4m 47s	remaining: 6m 1s
+487:	learn: 4.2333013	test: 4.4599963	best: 4.4599963 (487)	total: 4m 47s	remaining: 6m
+488:	learn: 4.2332508	test: 4.4599644	best: 4.4599644 (488)	total: 4m 48s	remaining: 6m
+489:	learn: 4.2332277	test: 4.4599493	best: 4.4599493 (489)	total: 4m 48s	remaining: 5m 59s
+490:	learn: 4.2331499	test: 4.4599397	best: 4.4599397 (490)	total: 4m 49s	remaining: 5m 59s
+491:	learn: 4.2330933	test: 4.4598542	best: 4.4598542 (491)	total: 4m 50s	remaining: 5m 58s
+492:	learn: 4.2327888	test: 4.4595780	best: 4.4595780 (492)	total: 4m 51s	remaining: 5m 58s
+493:	learn: 4.2327029	test: 4.4595493	best: 4.4595493 (493)	total: 4m 51s	remaining: 5m 57s
+494:	learn: 4.2326766	test: 4.4595521	best: 4.4595493 (493)	total: 4m 52s	remaining: 5m 57s
+495:	learn: 4.2326337	test: 4.4595116	best: 4.4595116 (495)	total: 4m 52s	remaining: 5m 56s
+496:	learn: 4.2325785	test: 4.4594331	best: 4.4594331 (496)	total: 4m 53s	remaining: 5m 55s
+497:	learn: 4.2324558	test: 4.4594188	best: 4.4594188 (497)	total: 4m 53s	remaining: 5m 55s
+498:	learn: 4.2323278	test: 4.4593940	best: 4.4593940 (498)	total: 4m 54s	remaining: 5m 54s
+499:	learn: 4.2322439	test: 4.4593361	best: 4.4593361 (499)	total: 4m 54s	remaining: 5m 53s
+500:	learn: 4.2321365	test: 4.4593506	best: 4.4593361 (499)	total: 4m 55s	remaining: 5m 53s
+501:	learn: 4.2320145	test: 4.4592556	best: 4.4592556 (501)	total: 4m 56s	remaining: 5m 52s
+502:	learn: 4.2319283	test: 4.4591929	best: 4.4591929 (502)	total: 4m 57s	remaining: 5m 52s
+503:	learn: 4.2319086	test: 4.4591696	best: 4.4591696 (503)	total: 4m 57s	remaining: 5m 52s
+504:	learn: 4.2317664	test: 4.4590292	best: 4.4590292 (504)	total: 4m 58s	remaining: 5m 51s
+505:	learn: 4.2316940	test: 4.4589037	best: 4.4589037 (505)	total: 4m 58s	remaining: 5m 50s
+506:	learn: 4.2316374	test: 4.4588852	best: 4.4588852 (506)	total: 4m 59s	remaining: 5m 50s
+507:	learn: 4.2315827	test: 4.4588518	best: 4.4588518 (507)	total: 5m	remaining: 5m 49s
+508:	learn: 4.2315797	test: 4.4588442	best: 4.4588442 (508)	total: 5m	remaining: 5m 49s
+509:	learn: 4.2315105	test: 4.4587753	best: 4.4587753 (509)	total: 5m 1s	remaining: 5m 48s
+510:	learn: 4.2313716	test: 4.4586499	best: 4.4586499 (510)	total: 5m 2s	remaining: 5m 48s
+511:	learn: 4.2313465	test: 4.4586345	best: 4.4586345 (511)	total: 5m 2s	remaining: 5m 47s
+512:	learn: 4.2313103	test: 4.4586145	best: 4.4586145 (512)	total: 5m 3s	remaining: 5m 47s
+513:	learn: 4.2312961	test: 4.4586040	best: 4.4586040 (513)	total: 5m 4s	remaining: 5m 46s
+514:	learn: 4.2312579	test: 4.4585917	best: 4.4585917 (514)	total: 5m 4s	remaining: 5m 46s
+515:	learn: 4.2311474	test: 4.4585310	best: 4.4585310 (515)	total: 5m 5s	remaining: 5m 45s
+516:	learn: 4.2310758	test: 4.4585066	best: 4.4585066 (516)	total: 5m 6s	remaining: 5m 45s
+517:	learn: 4.2310212	test: 4.4584672	best: 4.4584672 (517)	total: 5m 6s	remaining: 5m 44s
+518:	learn: 4.2309823	test: 4.4584548	best: 4.4584548 (518)	total: 5m 7s	remaining: 5m 44s
+519:	learn: 4.2308590	test: 4.4583616	best: 4.4583616 (519)	total: 5m 7s	remaining: 5m 43s
+520:	learn: 4.2307541	test: 4.4582756	best: 4.4582756 (520)	total: 5m 8s	remaining: 5m 42s
+521:	learn: 4.2306330	test: 4.4582143	best: 4.4582143 (521)	total: 5m 8s	remaining: 5m 42s
+522:	learn: 4.2305761	test: 4.4581344	best: 4.4581344 (522)	total: 5m 9s	remaining: 5m 41s
+523:	learn: 4.2304983	test: 4.4580616	best: 4.4580616 (523)	total: 5m 10s	remaining: 5m 40s
+524:	learn: 4.2304144	test: 4.4581008	best: 4.4580616 (523)	total: 5m 10s	remaining: 5m 40s
+525:	learn: 4.2303580	test: 4.4580535	best: 4.4580535 (525)	total: 5m 11s	remaining: 5m 39s
+526:	learn: 4.2302947	test: 4.4580173	best: 4.4580173 (526)	total: 5m 11s	remaining: 5m 39s
+527:	learn: 4.2301578	test: 4.4579323	best: 4.4579323 (527)	total: 5m 12s	remaining: 5m 38s
+528:	learn: 4.2300761	test: 4.4579046	best: 4.4579046 (528)	total: 5m 13s	remaining: 5m 37s
+529:	learn: 4.2300173	test: 4.4578627	best: 4.4578627 (529)	total: 5m 13s	remaining: 5m 37s
+530:	learn: 4.2299389	test: 4.4578158	best: 4.4578158 (530)	total: 5m 14s	remaining: 5m 37s
+531:	learn: 4.2298739	test: 4.4578053	best: 4.4578053 (531)	total: 5m 15s	remaining: 5m 36s
+532:	learn: 4.2298673	test: 4.4577983	best: 4.4577983 (532)	total: 5m 15s	remaining: 5m 36s
+533:	learn: 4.2298397	test: 4.4577733	best: 4.4577733 (533)	total: 5m 16s	remaining: 5m 35s
+534:	learn: 4.2297728	test: 4.4577624	best: 4.4577624 (534)	total: 5m 17s	remaining: 5m 35s
+535:	learn: 4.2296646	test: 4.4577001	best: 4.4577001 (535)	total: 5m 17s	remaining: 5m 34s
+536:	learn: 4.2296347	test: 4.4576766	best: 4.4576766 (536)	total: 5m 18s	remaining: 5m 33s
+537:	learn: 4.2296042	test: 4.4576382	best: 4.4576382 (537)	total: 5m 19s	remaining: 5m 33s
+538:	learn: 4.2295561	test: 4.4575994	best: 4.4575994 (538)	total: 5m 19s	remaining: 5m 32s
+539:	learn: 4.2295405	test: 4.4575910	best: 4.4575910 (539)	total: 5m 20s	remaining: 5m 32s
+540:	learn: 4.2294686	test: 4.4575508	best: 4.4575508 (540)	total: 5m 20s	remaining: 5m 31s
+541:	learn: 4.2293905	test: 4.4575113	best: 4.4575113 (541)	total: 5m 21s	remaining: 5m 30s
+542:	learn: 4.2293328	test: 4.4573752	best: 4.4573752 (542)	total: 5m 21s	remaining: 5m 30s
+543:	learn: 4.2292985	test: 4.4573498	best: 4.4573498 (543)	total: 5m 22s	remaining: 5m 29s
+544:	learn: 4.2292495	test: 4.4573281	best: 4.4573281 (544)	total: 5m 22s	remaining: 5m 28s
+545:	learn: 4.2291529	test: 4.4573227	best: 4.4573227 (545)	total: 5m 23s	remaining: 5m 28s
+546:	learn: 4.2291267	test: 4.4573490	best: 4.4573227 (545)	total: 5m 24s	remaining: 5m 27s
+547:	learn: 4.2291170	test: 4.4573486	best: 4.4573227 (545)	total: 5m 24s	remaining: 5m 26s
+548:	learn: 4.2289515	test: 4.4571671	best: 4.4571671 (548)	total: 5m 25s	remaining: 5m 26s
+549:	learn: 4.2288895	test: 4.4571134	best: 4.4571134 (549)	total: 5m 25s	remaining: 5m 25s
+550:	learn: 4.2288753	test: 4.4571091	best: 4.4571091 (550)	total: 5m 26s	remaining: 5m 25s
+551:	learn: 4.2288103	test: 4.4570525	best: 4.4570525 (551)	total: 5m 26s	remaining: 5m 24s
+552:	learn: 4.2287361	test: 4.4570103	best: 4.4570103 (552)	total: 5m 27s	remaining: 5m 23s
+553:	learn: 4.2285935	test: 4.4569095	best: 4.4569095 (553)	total: 5m 28s	remaining: 5m 23s
+554:	learn: 4.2285495	test: 4.4568754	best: 4.4568754 (554)	total: 5m 28s	remaining: 5m 23s
+555:	learn: 4.2284957	test: 4.4568380	best: 4.4568380 (555)	total: 5m 29s	remaining: 5m 22s
+556:	learn: 4.2284206	test: 4.4569070	best: 4.4568380 (555)	total: 5m 30s	remaining: 5m 21s
+557:	learn: 4.2284070	test: 4.4569006	best: 4.4568380 (555)	total: 5m 30s	remaining: 5m 21s
+558:	learn: 4.2282626	test: 4.4568898	best: 4.4568380 (555)	total: 5m 31s	remaining: 5m 20s
+559:	learn: 4.2281727	test: 4.4568441	best: 4.4568380 (555)	total: 5m 32s	remaining: 5m 20s
+560:	learn: 4.2281145	test: 4.4568000	best: 4.4568000 (560)	total: 5m 32s	remaining: 5m 19s
+561:	learn: 4.2280701	test: 4.4567591	best: 4.4567591 (561)	total: 5m 33s	remaining: 5m 19s
+562:	learn: 4.2280162	test: 4.4567049	best: 4.4567049 (562)	total: 5m 34s	remaining: 5m 18s
+563:	learn: 4.2279089	test: 4.4566407	best: 4.4566407 (563)	total: 5m 34s	remaining: 5m 18s
+564:	learn: 4.2278956	test: 4.4566489	best: 4.4566407 (563)	total: 5m 35s	remaining: 5m 17s
+565:	learn: 4.2278710	test: 4.4566280	best: 4.4566280 (565)	total: 5m 35s	remaining: 5m 16s
+566:	learn: 4.2277986	test: 4.4565961	best: 4.4565961 (566)	total: 5m 36s	remaining: 5m 16s
+567:	learn: 4.2277632	test: 4.4565884	best: 4.4565884 (567)	total: 5m 37s	remaining: 5m 15s
+568:	learn: 4.2276905	test: 4.4565890	best: 4.4565884 (567)	total: 5m 38s	remaining: 5m 15s
+569:	learn: 4.2276194	test: 4.4565151	best: 4.4565151 (569)	total: 5m 38s	remaining: 5m 14s
+570:	learn: 4.2275117	test: 4.4564809	best: 4.4564809 (570)	total: 5m 39s	remaining: 5m 14s
+571:	learn: 4.2274550	test: 4.4564561	best: 4.4564561 (571)	total: 5m 39s	remaining: 5m 13s
+572:	learn: 4.2274514	test: 4.4564712	best: 4.4564561 (571)	total: 5m 40s	remaining: 5m 13s
+573:	learn: 4.2272970	test: 4.4564588	best: 4.4564561 (571)	total: 5m 41s	remaining: 5m 12s
+574:	learn: 4.2272224	test: 4.4564753	best: 4.4564561 (571)	total: 5m 41s	remaining: 5m 11s
+575:	learn: 4.2271564	test: 4.4564330	best: 4.4564330 (575)	total: 5m 42s	remaining: 5m 11s
+576:	learn: 4.2271389	test: 4.4564220	best: 4.4564220 (576)	total: 5m 42s	remaining: 5m 10s
+577:	learn: 4.2270750	test: 4.4563806	best: 4.4563806 (577)	total: 5m 43s	remaining: 5m 10s
+578:	learn: 4.2269852	test: 4.4563652	best: 4.4563652 (578)	total: 5m 44s	remaining: 5m 9s
+579:	learn: 4.2269397	test: 4.4563272	best: 4.4563272 (579)	total: 5m 44s	remaining: 5m 9s
+580:	learn: 4.2268706	test: 4.4562446	best: 4.4562446 (580)	total: 5m 45s	remaining: 5m 8s
+581:	learn: 4.2267883	test: 4.4561703	best: 4.4561703 (581)	total: 5m 45s	remaining: 5m 7s
+582:	learn: 4.2267577	test: 4.4561414	best: 4.4561414 (582)	total: 5m 46s	remaining: 5m 7s
+583:	learn: 4.2267367	test: 4.4561447	best: 4.4561414 (582)	total: 5m 47s	remaining: 5m 6s
+584:	learn: 4.2267078	test: 4.4561236	best: 4.4561236 (584)	total: 5m 47s	remaining: 5m 6s
+585:	learn: 4.2266910	test: 4.4560998	best: 4.4560998 (585)	total: 5m 48s	remaining: 5m 5s
+586:	learn: 4.2266204	test: 4.4560607	best: 4.4560607 (586)	total: 5m 49s	remaining: 5m 5s
+587:	learn: 4.2265879	test: 4.4560374	best: 4.4560374 (587)	total: 5m 49s	remaining: 5m 4s
+588:	learn: 4.2265195	test: 4.4560028	best: 4.4560028 (588)	total: 5m 50s	remaining: 5m 4s
+589:	learn: 4.2264992	test: 4.4559983	best: 4.4559983 (589)	total: 5m 51s	remaining: 5m 3s
+590:	learn: 4.2264764	test: 4.4559971	best: 4.4559971 (590)	total: 5m 52s	remaining: 5m 3s
+591:	learn: 4.2264379	test: 4.4559378	best: 4.4559378 (591)	total: 5m 52s	remaining: 5m 2s
+592:	learn: 4.2263315	test: 4.4558695	best: 4.4558695 (592)	total: 5m 53s	remaining: 5m 2s
+593:	learn: 4.2263192	test: 4.4558563	best: 4.4558563 (593)	total: 5m 54s	remaining: 5m 1s
+594:	learn: 4.2262455	test: 4.4558113	best: 4.4558113 (594)	total: 5m 54s	remaining: 5m
+595:	learn: 4.2262010	test: 4.4558300	best: 4.4558113 (594)	total: 5m 55s	remaining: 5m
+596:	learn: 4.2260568	test: 4.4557130	best: 4.4557130 (596)	total: 5m 55s	remaining: 4m 59s
+597:	learn: 4.2260398	test: 4.4557099	best: 4.4557099 (597)	total: 5m 56s	remaining: 4m 59s
+598:	learn: 4.2259381	test: 4.4556632	best: 4.4556632 (598)	total: 5m 56s	remaining: 4m 58s
+599:	learn: 4.2258734	test: 4.4556093	best: 4.4556093 (599)	total: 5m 57s	remaining: 4m 57s
+600:	learn: 4.2257867	test: 4.4555557	best: 4.4555557 (600)	total: 5m 57s	remaining: 4m 57s
+601:	learn: 4.2257390	test: 4.4555176	best: 4.4555176 (601)	total: 5m 58s	remaining: 4m 56s
+602:	learn: 4.2256307	test: 4.4552132	best: 4.4552132 (602)	total: 5m 59s	remaining: 4m 56s
+603:	learn: 4.2255486	test: 4.4551678	best: 4.4551678 (603)	total: 5m 59s	remaining: 4m 55s
+604:	learn: 4.2255172	test: 4.4551514	best: 4.4551514 (604)	total: 6m	remaining: 4m 54s
+605:	learn: 4.2254751	test: 4.4551428	best: 4.4551428 (605)	total: 6m 1s	remaining: 4m 54s
+606:	learn: 4.2254212	test: 4.4551213	best: 4.4551213 (606)	total: 6m 1s	remaining: 4m 53s
+607:	learn: 4.2252903	test: 4.4550218	best: 4.4550218 (607)	total: 6m 2s	remaining: 4m 53s
+608:	learn: 4.2252576	test: 4.4549950	best: 4.4549950 (608)	total: 6m 3s	remaining: 4m 52s
+609:	learn: 4.2252130	test: 4.4549498	best: 4.4549498 (609)	total: 6m 3s	remaining: 4m 52s
+610:	learn: 4.2251804	test: 4.4549134	best: 4.4549134 (610)	total: 6m 4s	remaining: 4m 51s
+611:	learn: 4.2251691	test: 4.4549076	best: 4.4549076 (611)	total: 6m 4s	remaining: 4m 50s
+612:	learn: 4.2251290	test: 4.4549240	best: 4.4549076 (611)	total: 6m 5s	remaining: 4m 50s
+613:	learn: 4.2251136	test: 4.4549088	best: 4.4549076 (611)	total: 6m 6s	remaining: 4m 49s
+614:	learn: 4.2250577	test: 4.4548366	best: 4.4548366 (614)	total: 6m 6s	remaining: 4m 49s
+615:	learn: 4.2250336	test: 4.4548005	best: 4.4548005 (615)	total: 6m 7s	remaining: 4m 48s
+616:	learn: 4.2249881	test: 4.4547553	best: 4.4547553 (616)	total: 6m 8s	remaining: 4m 48s
+617:	learn: 4.2249734	test: 4.4547536	best: 4.4547536 (617)	total: 6m 8s	remaining: 4m 47s
+618:	learn: 4.2249676	test: 4.4547503	best: 4.4547503 (618)	total: 6m 9s	remaining: 4m 46s
+619:	learn: 4.2249095	test: 4.4547460	best: 4.4547460 (619)	total: 6m 10s	remaining: 4m 46s
+620:	learn: 4.2248438	test: 4.4547054	best: 4.4547054 (620)	total: 6m 10s	remaining: 4m 45s
+621:	learn: 4.2248251	test: 4.4546970	best: 4.4546970 (621)	total: 6m 11s	remaining: 4m 45s
+622:	learn: 4.2245017	test: 4.4543710	best: 4.4543710 (622)	total: 6m 11s	remaining: 4m 44s
+623:	learn: 4.2244535	test: 4.4543722	best: 4.4543710 (622)	total: 6m 12s	remaining: 4m 44s
+624:	learn: 4.2244024	test: 4.4543308	best: 4.4543308 (624)	total: 6m 13s	remaining: 4m 43s
+625:	learn: 4.2243871	test: 4.4543232	best: 4.4543232 (625)	total: 6m 13s	remaining: 4m 43s
+626:	learn: 4.2243578	test: 4.4543163	best: 4.4543163 (626)	total: 6m 14s	remaining: 4m 42s
+627:	learn: 4.2243023	test: 4.4542606	best: 4.4542606 (627)	total: 6m 14s	remaining: 4m 41s
+628:	learn: 4.2242021	test: 4.4542429	best: 4.4542429 (628)	total: 6m 15s	remaining: 4m 41s
+629:	learn: 4.2241658	test: 4.4542387	best: 4.4542387 (629)	total: 6m 15s	remaining: 4m 40s
+630:	learn: 4.2241299	test: 4.4542132	best: 4.4542132 (630)	total: 6m 16s	remaining: 4m 39s
+631:	learn: 4.2241197	test: 4.4542285	best: 4.4542132 (630)	total: 6m 17s	remaining: 4m 39s
+632:	learn: 4.2240611	test: 4.4541804	best: 4.4541804 (632)	total: 6m 17s	remaining: 4m 38s
+633:	learn: 4.2239418	test: 4.4541003	best: 4.4541003 (633)	total: 6m 18s	remaining: 4m 37s
+634:	learn: 4.2238967	test: 4.4540915	best: 4.4540915 (634)	total: 6m 18s	remaining: 4m 37s
+635:	learn: 4.2238719	test: 4.4540970	best: 4.4540915 (634)	total: 6m 19s	remaining: 4m 36s
+636:	learn: 4.2238379	test: 4.4540612	best: 4.4540612 (636)	total: 6m 20s	remaining: 4m 36s
+637:	learn: 4.2237782	test: 4.4540570	best: 4.4540570 (637)	total: 6m 20s	remaining: 4m 35s
+638:	learn: 4.2237278	test: 4.4540224	best: 4.4540224 (638)	total: 6m 21s	remaining: 4m 35s
+639:	learn: 4.2236735	test: 4.4539983	best: 4.4539983 (639)	total: 6m 21s	remaining: 4m 34s
+640:	learn: 4.2236721	test: 4.4539967	best: 4.4539967 (640)	total: 6m 22s	remaining: 4m 33s
+641:	learn: 4.2235403	test: 4.4540041	best: 4.4539967 (640)	total: 6m 23s	remaining: 4m 33s
+642:	learn: 4.2235040	test: 4.4539899	best: 4.4539899 (642)	total: 6m 23s	remaining: 4m 32s
+643:	learn: 4.2234537	test: 4.4539620	best: 4.4539620 (643)	total: 6m 24s	remaining: 4m 32s
+644:	learn: 4.2233969	test: 4.4539246	best: 4.4539246 (644)	total: 6m 24s	remaining: 4m 31s
+645:	learn: 4.2233204	test: 4.4539185	best: 4.4539185 (645)	total: 6m 25s	remaining: 4m 30s
+646:	learn: 4.2232514	test: 4.4538497	best: 4.4538497 (646)	total: 6m 25s	remaining: 4m 30s
+647:	learn: 4.2231936	test: 4.4538425	best: 4.4538425 (647)	total: 6m 26s	remaining: 4m 29s
+648:	learn: 4.2231116	test: 4.4537759	best: 4.4537759 (648)	total: 6m 27s	remaining: 4m 28s
+649:	learn: 4.2230953	test: 4.4537616	best: 4.4537616 (649)	total: 6m 27s	remaining: 4m 28s
+650:	learn: 4.2229850	test: 4.4536729	best: 4.4536729 (650)	total: 6m 28s	remaining: 4m 27s
+651:	learn: 4.2229647	test: 4.4536577	best: 4.4536577 (651)	total: 6m 28s	remaining: 4m 27s
+652:	learn: 4.2228926	test: 4.4536300	best: 4.4536300 (652)	total: 6m 29s	remaining: 4m 26s
+653:	learn: 4.2228252	test: 4.4536231	best: 4.4536231 (653)	total: 6m 30s	remaining: 4m 26s
+654:	learn: 4.2226343	test: 4.4535321	best: 4.4535321 (654)	total: 6m 30s	remaining: 4m 25s
+655:	learn: 4.2225757	test: 4.4535134	best: 4.4535134 (655)	total: 6m 31s	remaining: 4m 25s
+656:	learn: 4.2225111	test: 4.4534640	best: 4.4534640 (656)	total: 6m 32s	remaining: 4m 24s
+657:	learn: 4.2224980	test: 4.4534620	best: 4.4534620 (657)	total: 6m 32s	remaining: 4m 23s
+658:	learn: 4.2224668	test: 4.4534303	best: 4.4534303 (658)	total: 6m 33s	remaining: 4m 23s
+659:	learn: 4.2224095	test: 4.4533891	best: 4.4533891 (659)	total: 6m 34s	remaining: 4m 22s
+660:	learn: 4.2223147	test: 4.4533918	best: 4.4533891 (659)	total: 6m 34s	remaining: 4m 22s
+661:	learn: 4.2222870	test: 4.4534117	best: 4.4533891 (659)	total: 6m 35s	remaining: 4m 21s
+662:	learn: 4.2222199	test: 4.4534039	best: 4.4533891 (659)	total: 6m 35s	remaining: 4m 20s
+663:	learn: 4.2221884	test: 4.4533733	best: 4.4533733 (663)	total: 6m 36s	remaining: 4m 20s
+664:	learn: 4.2221284	test: 4.4533639	best: 4.4533639 (664)	total: 6m 37s	remaining: 4m 19s
+665:	learn: 4.2221178	test: 4.4533602	best: 4.4533602 (665)	total: 6m 38s	remaining: 4m 19s
+666:	learn: 4.2220740	test: 4.4533614	best: 4.4533602 (665)	total: 6m 38s	remaining: 4m 18s
+667:	learn: 4.2219770	test: 4.4533551	best: 4.4533551 (667)	total: 6m 39s	remaining: 4m 18s
+668:	learn: 4.2218646	test: 4.4532790	best: 4.4532790 (668)	total: 6m 40s	remaining: 4m 17s
+669:	learn: 4.2217349	test: 4.4532172	best: 4.4532172 (669)	total: 6m 40s	remaining: 4m 17s
+670:	learn: 4.2215950	test: 4.4531005	best: 4.4531005 (670)	total: 6m 41s	remaining: 4m 16s
+671:	learn: 4.2214375	test: 4.4530442	best: 4.4530442 (671)	total: 6m 41s	remaining: 4m 15s
+672:	learn: 4.2213980	test: 4.4530590	best: 4.4530442 (671)	total: 6m 42s	remaining: 4m 15s
+673:	learn: 4.2213894	test: 4.4530473	best: 4.4530442 (671)	total: 6m 42s	remaining: 4m 14s
+674:	learn: 4.2213730	test: 4.4530446	best: 4.4530442 (671)	total: 6m 43s	remaining: 4m 14s
+675:	learn: 4.2213175	test: 4.4530172	best: 4.4530172 (675)	total: 6m 44s	remaining: 4m 13s
+676:	learn: 4.2212824	test: 4.4530109	best: 4.4530109 (676)	total: 6m 44s	remaining: 4m 12s
+677:	learn: 4.2211781	test: 4.4529838	best: 4.4529838 (677)	total: 6m 45s	remaining: 4m 12s
+678:	learn: 4.2210945	test: 4.4529338	best: 4.4529338 (678)	total: 6m 45s	remaining: 4m 11s
+679:	learn: 4.2210529	test: 4.4529392	best: 4.4529338 (678)	total: 6m 46s	remaining: 4m 11s
+680:	learn: 4.2210363	test: 4.4529453	best: 4.4529338 (678)	total: 6m 47s	remaining: 4m 10s
+681:	learn: 4.2209821	test: 4.4529257	best: 4.4529257 (681)	total: 6m 48s	remaining: 4m 10s
+682:	learn: 4.2209322	test: 4.4528812	best: 4.4528812 (682)	total: 6m 48s	remaining: 4m 9s
+683:	learn: 4.2208898	test: 4.4528476	best: 4.4528476 (683)	total: 6m 49s	remaining: 4m 9s
+684:	learn: 4.2208636	test: 4.4528220	best: 4.4528220 (684)	total: 6m 50s	remaining: 4m 8s
+685:	learn: 4.2208119	test: 4.4527872	best: 4.4527872 (685)	total: 6m 50s	remaining: 4m 7s
+686:	learn: 4.2207650	test: 4.4527576	best: 4.4527576 (686)	total: 6m 51s	remaining: 4m 7s
+687:	learn: 4.2206905	test: 4.4527360	best: 4.4527360 (687)	total: 6m 52s	remaining: 4m 6s
+688:	learn: 4.2206464	test: 4.4527317	best: 4.4527317 (688)	total: 6m 52s	remaining: 4m 6s
+689:	learn: 4.2206364	test: 4.4527258	best: 4.4527258 (689)	total: 6m 53s	remaining: 4m 5s
+690:	learn: 4.2206168	test: 4.4527128	best: 4.4527128 (690)	total: 6m 54s	remaining: 4m 5s
+691:	learn: 4.2205884	test: 4.4527059	best: 4.4527059 (691)	total: 6m 54s	remaining: 4m 4s
+692:	learn: 4.2205746	test: 4.4526779	best: 4.4526779 (692)	total: 6m 55s	remaining: 4m 4s
+693:	learn: 4.2205290	test: 4.4526846	best: 4.4526779 (692)	total: 6m 56s	remaining: 4m 3s
+694:	learn: 4.2205222	test: 4.4526845	best: 4.4526779 (692)	total: 6m 56s	remaining: 4m 2s
+695:	learn: 4.2205171	test: 4.4526812	best: 4.4526779 (692)	total: 6m 57s	remaining: 4m 2s
+696:	learn: 4.2204150	test: 4.4526442	best: 4.4526442 (696)	total: 6m 58s	remaining: 4m 1s
+697:	learn: 4.2203800	test: 4.4526172	best: 4.4526172 (697)	total: 6m 59s	remaining: 4m 1s
+698:	learn: 4.2203140	test: 4.4525620	best: 4.4525620 (698)	total: 6m 59s	remaining: 4m
+699:	learn: 4.2202386	test: 4.4524658	best: 4.4524658 (699)	total: 7m	remaining: 4m
+700:	learn: 4.2201862	test: 4.4524645	best: 4.4524645 (700)	total: 7m 1s	remaining: 3m 59s
+701:	learn: 4.2201062	test: 4.4524014	best: 4.4524014 (701)	total: 7m 1s	remaining: 3m 59s
+702:	learn: 4.2200579	test: 4.4523650	best: 4.4523650 (702)	total: 7m 2s	remaining: 3m 58s
+703:	learn: 4.2200296	test: 4.4523493	best: 4.4523493 (703)	total: 7m 3s	remaining: 3m 57s
+704:	learn: 4.2199826	test: 4.4523180	best: 4.4523180 (704)	total: 7m 3s	remaining: 3m 57s
+705:	learn: 4.2199651	test: 4.4522917	best: 4.4522917 (705)	total: 7m 4s	remaining: 3m 56s
+706:	learn: 4.2199605	test: 4.4522944	best: 4.4522917 (705)	total: 7m 5s	remaining: 3m 56s
+707:	learn: 4.2198011	test: 4.4521742	best: 4.4521742 (707)	total: 7m 5s	remaining: 3m 55s
+708:	learn: 4.2196878	test: 4.4521050	best: 4.4521050 (708)	total: 7m 6s	remaining: 3m 55s
+709:	learn: 4.2196659	test: 4.4521089	best: 4.4521050 (708)	total: 7m 6s	remaining: 3m 54s
+710:	learn: 4.2196082	test: 4.4520560	best: 4.4520560 (710)	total: 7m 7s	remaining: 3m 53s
+711:	learn: 4.2195874	test: 4.4520538	best: 4.4520538 (711)	total: 7m 8s	remaining: 3m 53s
+712:	learn: 4.2194308	test: 4.4519727	best: 4.4519727 (712)	total: 7m 8s	remaining: 3m 52s
+713:	learn: 4.2193682	test: 4.4519378	best: 4.4519378 (713)	total: 7m 9s	remaining: 3m 52s
+714:	learn: 4.2193018	test: 4.4518948	best: 4.4518948 (714)	total: 7m 10s	remaining: 3m 51s
+715:	learn: 4.2192811	test: 4.4518705	best: 4.4518705 (715)	total: 7m 10s	remaining: 3m 51s
+716:	learn: 4.2191960	test: 4.4518094	best: 4.4518094 (716)	total: 7m 11s	remaining: 3m 50s
+717:	learn: 4.2191487	test: 4.4517963	best: 4.4517963 (717)	total: 7m 11s	remaining: 3m 49s
+718:	learn: 4.2191019	test: 4.4517750	best: 4.4517750 (718)	total: 7m 12s	remaining: 3m 49s
+719:	learn: 4.2190744	test: 4.4517554	best: 4.4517554 (719)	total: 7m 13s	remaining: 3m 48s
+720:	learn: 4.2190249	test: 4.4517518	best: 4.4517518 (720)	total: 7m 13s	remaining: 3m 47s
+721:	learn: 4.2189887	test: 4.4517548	best: 4.4517518 (720)	total: 7m 14s	remaining: 3m 47s
+722:	learn: 4.2188435	test: 4.4516426	best: 4.4516426 (722)	total: 7m 14s	remaining: 3m 46s
+723:	learn: 4.2188246	test: 4.4516406	best: 4.4516406 (723)	total: 7m 15s	remaining: 3m 46s
+724:	learn: 4.2187657	test: 4.4516243	best: 4.4516243 (724)	total: 7m 16s	remaining: 3m 45s
+725:	learn: 4.2187011	test: 4.4515072	best: 4.4515072 (725)	total: 7m 16s	remaining: 3m 45s
+726:	learn: 4.2186146	test: 4.4514733	best: 4.4514733 (726)	total: 7m 17s	remaining: 3m 44s
+727:	learn: 4.2185870	test: 4.4514635	best: 4.4514635 (727)	total: 7m 17s	remaining: 3m 43s
+728:	learn: 4.2184909	test: 4.4514651	best: 4.4514635 (727)	total: 7m 18s	remaining: 3m 43s
+729:	learn: 4.2184665	test: 4.4514320	best: 4.4514320 (729)	total: 7m 18s	remaining: 3m 42s
+730:	learn: 4.2184044	test: 4.4513011	best: 4.4513011 (730)	total: 7m 19s	remaining: 3m 41s
+731:	learn: 4.2183661	test: 4.4512827	best: 4.4512827 (731)	total: 7m 20s	remaining: 3m 41s
+732:	learn: 4.2183462	test: 4.4512724	best: 4.4512724 (732)	total: 7m 20s	remaining: 3m 40s
+733:	learn: 4.2181799	test: 4.4511719	best: 4.4511719 (733)	total: 7m 21s	remaining: 3m 40s
+734:	learn: 4.2181323	test: 4.4511357	best: 4.4511357 (734)	total: 7m 22s	remaining: 3m 39s
+735:	learn: 4.2180752	test: 4.4511124	best: 4.4511124 (735)	total: 7m 22s	remaining: 3m 38s
+736:	learn: 4.2180643	test: 4.4511126	best: 4.4511124 (735)	total: 7m 23s	remaining: 3m 38s
+737:	learn: 4.2180433	test: 4.4511331	best: 4.4511124 (735)	total: 7m 23s	remaining: 3m 37s
+738:	learn: 4.2180049	test: 4.4511099	best: 4.4511099 (738)	total: 7m 24s	remaining: 3m 37s
+739:	learn: 4.2179770	test: 4.4510949	best: 4.4510949 (739)	total: 7m 25s	remaining: 3m 36s
+740:	learn: 4.2178872	test: 4.4510831	best: 4.4510831 (740)	total: 7m 26s	remaining: 3m 36s
+741:	learn: 4.2178201	test: 4.4511307	best: 4.4510831 (740)	total: 7m 26s	remaining: 3m 35s
+742:	learn: 4.2177404	test: 4.4510663	best: 4.4510663 (742)	total: 7m 27s	remaining: 3m 34s
+743:	learn: 4.2176958	test: 4.4510360	best: 4.4510360 (743)	total: 7m 27s	remaining: 3m 34s
+744:	learn: 4.2175602	test: 4.4509042	best: 4.4509042 (744)	total: 7m 28s	remaining: 3m 33s
+745:	learn: 4.2175164	test: 4.4509018	best: 4.4509018 (745)	total: 7m 28s	remaining: 3m 33s
+746:	learn: 4.2174974	test: 4.4508928	best: 4.4508928 (746)	total: 7m 29s	remaining: 3m 32s
+747:	learn: 4.2174500	test: 4.4509060	best: 4.4508928 (746)	total: 7m 30s	remaining: 3m 31s
+748:	learn: 4.2173799	test: 4.4508839	best: 4.4508839 (748)	total: 7m 30s	remaining: 3m 31s
+749:	learn: 4.2173644	test: 4.4508602	best: 4.4508602 (749)	total: 7m 31s	remaining: 3m 30s
+750:	learn: 4.2173456	test: 4.4508606	best: 4.4508602 (749)	total: 7m 31s	remaining: 3m 29s
+751:	learn: 4.2172454	test: 4.4508707	best: 4.4508602 (749)	total: 7m 32s	remaining: 3m 29s
+752:	learn: 4.2172128	test: 4.4508593	best: 4.4508593 (752)	total: 7m 32s	remaining: 3m 28s
+753:	learn: 4.2171826	test: 4.4508500	best: 4.4508500 (753)	total: 7m 33s	remaining: 3m 28s
+754:	learn: 4.2171538	test: 4.4508606	best: 4.4508500 (753)	total: 7m 34s	remaining: 3m 27s
+755:	learn: 4.2171166	test: 4.4508521	best: 4.4508500 (753)	total: 7m 34s	remaining: 3m 26s
+756:	learn: 4.2171043	test: 4.4508441	best: 4.4508441 (756)	total: 7m 35s	remaining: 3m 26s
+757:	learn: 4.2170562	test: 4.4508163	best: 4.4508163 (757)	total: 7m 36s	remaining: 3m 25s
+758:	learn: 4.2169996	test: 4.4507969	best: 4.4507969 (758)	total: 7m 36s	remaining: 3m 25s
+759:	learn: 4.2169436	test: 4.4507284	best: 4.4507284 (759)	total: 7m 37s	remaining: 3m 24s
+760:	learn: 4.2168736	test: 4.4506097	best: 4.4506097 (760)	total: 7m 37s	remaining: 3m 23s
+761:	learn: 4.2168474	test: 4.4505878	best: 4.4505878 (761)	total: 7m 38s	remaining: 3m 23s
+762:	learn: 4.2167686	test: 4.4505157	best: 4.4505157 (762)	total: 7m 39s	remaining: 3m 22s
+763:	learn: 4.2167032	test: 4.4505051	best: 4.4505051 (763)	total: 7m 39s	remaining: 3m 22s
+764:	learn: 4.2166860	test: 4.4504925	best: 4.4504925 (764)	total: 7m 40s	remaining: 3m 21s
+765:	learn: 4.2166238	test: 4.4504387	best: 4.4504387 (765)	total: 7m 41s	remaining: 3m 21s
+766:	learn: 4.2165145	test: 4.4504207	best: 4.4504207 (766)	total: 7m 41s	remaining: 3m 20s
+767:	learn: 4.2164933	test: 4.4504270	best: 4.4504207 (766)	total: 7m 42s	remaining: 3m 19s
+768:	learn: 4.2164825	test: 4.4504229	best: 4.4504207 (766)	total: 7m 42s	remaining: 3m 19s
+769:	learn: 4.2164151	test: 4.4503061	best: 4.4503061 (769)	total: 7m 43s	remaining: 3m 18s
+770:	learn: 4.2164009	test: 4.4502971	best: 4.4502971 (770)	total: 7m 44s	remaining: 3m 18s
+771:	learn: 4.2163624	test: 4.4502579	best: 4.4502579 (771)	total: 7m 44s	remaining: 3m 17s
+772:	learn: 4.2163200	test: 4.4502436	best: 4.4502436 (772)	total: 7m 45s	remaining: 3m 16s
+773:	learn: 4.2162844	test: 4.4502189	best: 4.4502189 (773)	total: 7m 45s	remaining: 3m 16s
+774:	learn: 4.2162292	test: 4.4502120	best: 4.4502120 (774)	total: 7m 46s	remaining: 3m 15s
+775:	learn: 4.2162020	test: 4.4501872	best: 4.4501872 (775)	total: 7m 46s	remaining: 3m 14s
+776:	learn: 4.2160816	test: 4.4501532	best: 4.4501532 (776)	total: 7m 47s	remaining: 3m 14s
+777:	learn: 4.2160771	test: 4.4501544	best: 4.4501532 (776)	total: 7m 47s	remaining: 3m 13s
+778:	learn: 4.2160021	test: 4.4501508	best: 4.4501508 (778)	total: 7m 48s	remaining: 3m 13s
+779:	learn: 4.2159254	test: 4.4501088	best: 4.4501088 (779)	total: 7m 49s	remaining: 3m 12s
+780:	learn: 4.2158578	test: 4.4501019	best: 4.4501019 (780)	total: 7m 49s	remaining: 3m 11s
+781:	learn: 4.2158439	test: 4.4501084	best: 4.4501019 (780)	total: 7m 50s	remaining: 3m 11s
+782:	learn: 4.2158423	test: 4.4501055	best: 4.4501019 (780)	total: 7m 50s	remaining: 3m 10s
+783:	learn: 4.2157795	test: 4.4500502	best: 4.4500502 (783)	total: 7m 51s	remaining: 3m 10s
+784:	learn: 4.2157575	test: 4.4500441	best: 4.4500441 (784)	total: 7m 52s	remaining: 3m 9s
+785:	learn: 4.2157326	test: 4.4500190	best: 4.4500190 (785)	total: 7m 53s	remaining: 3m 8s
+786:	learn: 4.2155962	test: 4.4498777	best: 4.4498777 (786)	total: 7m 53s	remaining: 3m 8s
+787:	learn: 4.2155395	test: 4.4498388	best: 4.4498388 (787)	total: 7m 54s	remaining: 3m 7s
+788:	learn: 4.2154845	test: 4.4498559	best: 4.4498388 (787)	total: 7m 54s	remaining: 3m 7s
+789:	learn: 4.2154196	test: 4.4498141	best: 4.4498141 (789)	total: 7m 55s	remaining: 3m 6s
+790:	learn: 4.2153966	test: 4.4498073	best: 4.4498073 (790)	total: 7m 55s	remaining: 3m 5s
+791:	learn: 4.2153647	test: 4.4498301	best: 4.4498073 (790)	total: 7m 56s	remaining: 3m 5s
+792:	learn: 4.2153036	test: 4.4497877	best: 4.4497877 (792)	total: 7m 57s	remaining: 3m 4s
+793:	learn: 4.2152637	test: 4.4497594	best: 4.4497594 (793)	total: 7m 57s	remaining: 3m 4s
+794:	learn: 4.2152464	test: 4.4497603	best: 4.4497594 (793)	total: 7m 58s	remaining: 3m 3s
+795:	learn: 4.2152292	test: 4.4497585	best: 4.4497585 (795)	total: 7m 59s	remaining: 3m 3s
+796:	learn: 4.2152138	test: 4.4497505	best: 4.4497505 (796)	total: 7m 59s	remaining: 3m 2s
+797:	learn: 4.2151135	test: 4.4497807	best: 4.4497505 (796)	total: 8m	remaining: 3m 1s
+798:	learn: 4.2150185	test: 4.4497962	best: 4.4497505 (796)	total: 8m	remaining: 3m 1s
+799:	learn: 4.2149801	test: 4.4497517	best: 4.4497505 (796)	total: 8m 1s	remaining: 3m
+800:	learn: 4.2149311	test: 4.4497132	best: 4.4497132 (800)	total: 8m 2s	remaining: 3m
+801:	learn: 4.2148794	test: 4.4497508	best: 4.4497132 (800)	total: 8m 3s	remaining: 2m 59s
+802:	learn: 4.2148525	test: 4.4497403	best: 4.4497132 (800)	total: 8m 3s	remaining: 2m 58s
+803:	learn: 4.2148142	test: 4.4497418	best: 4.4497132 (800)	total: 8m 4s	remaining: 2m 58s
+804:	learn: 4.2147662	test: 4.4497195	best: 4.4497132 (800)	total: 8m 5s	remaining: 2m 57s
+805:	learn: 4.2146891	test: 4.4496423	best: 4.4496423 (805)	total: 8m 5s	remaining: 2m 57s
+806:	learn: 4.2146603	test: 4.4496255	best: 4.4496255 (806)	total: 8m 6s	remaining: 2m 56s
+807:	learn: 4.2145484	test: 4.4495439	best: 4.4495439 (807)	total: 8m 6s	remaining: 2m 55s
+808:	learn: 4.2145170	test: 4.4495388	best: 4.4495388 (808)	total: 8m 7s	remaining: 2m 55s
+809:	learn: 4.2144510	test: 4.4494800	best: 4.4494800 (809)	total: 8m 8s	remaining: 2m 54s
+810:	learn: 4.2143846	test: 4.4494518	best: 4.4494518 (810)	total: 8m 9s	remaining: 2m 54s
+811:	learn: 4.2143453	test: 4.4494538	best: 4.4494518 (810)	total: 8m 9s	remaining: 2m 53s
+812:	learn: 4.2142856	test: 4.4494377	best: 4.4494377 (812)	total: 8m 10s	remaining: 2m 53s
+813:	learn: 4.2142549	test: 4.4494117	best: 4.4494117 (813)	total: 8m 10s	remaining: 2m 52s
+814:	learn: 4.2142462	test: 4.4494103	best: 4.4494103 (814)	total: 8m 11s	remaining: 2m 51s
+815:	learn: 4.2141259	test: 4.4493829	best: 4.4493829 (815)	total: 8m 12s	remaining: 2m 51s
+816:	learn: 4.2141037	test: 4.4493763	best: 4.4493763 (816)	total: 8m 12s	remaining: 2m 50s
+817:	learn: 4.2140779	test: 4.4493709	best: 4.4493709 (817)	total: 8m 13s	remaining: 2m 50s
+818:	learn: 4.2140386	test: 4.4493349	best: 4.4493349 (818)	total: 8m 14s	remaining: 2m 49s
+819:	learn: 4.2139478	test: 4.4493220	best: 4.4493220 (819)	total: 8m 14s	remaining: 2m 48s
+820:	learn: 4.2139430	test: 4.4493196	best: 4.4493196 (820)	total: 8m 15s	remaining: 2m 48s
+821:	learn: 4.2138827	test: 4.4493199	best: 4.4493196 (820)	total: 8m 15s	remaining: 2m 47s
+822:	learn: 4.2138436	test: 4.4493203	best: 4.4493196 (820)	total: 8m 16s	remaining: 2m 47s
+823:	learn: 4.2138069	test: 4.4493089	best: 4.4493089 (823)	total: 8m 16s	remaining: 2m 46s
+824:	learn: 4.2137836	test: 4.4492994	best: 4.4492994 (824)	total: 8m 17s	remaining: 2m 45s
+825:	learn: 4.2137290	test: 4.4493006	best: 4.4492994 (824)	total: 8m 18s	remaining: 2m 45s
+826:	learn: 4.2136842	test: 4.4492008	best: 4.4492008 (826)	total: 8m 18s	remaining: 2m 44s
+827:	learn: 4.2136362	test: 4.4491645	best: 4.4491645 (827)	total: 8m 19s	remaining: 2m 44s
+828:	learn: 4.2135681	test: 4.4490833	best: 4.4490833 (828)	total: 8m 19s	remaining: 2m 43s
+829:	learn: 4.2134455	test: 4.4490147	best: 4.4490147 (829)	total: 8m 20s	remaining: 2m 42s
+830:	learn: 4.2132677	test: 4.4487376	best: 4.4487376 (830)	total: 8m 21s	remaining: 2m 42s
+831:	learn: 4.2132365	test: 4.4487208	best: 4.4487208 (831)	total: 8m 21s	remaining: 2m 41s
+832:	learn: 4.2131668	test: 4.4486760	best: 4.4486760 (832)	total: 8m 22s	remaining: 2m 41s
+833:	learn: 4.2131570	test: 4.4486689	best: 4.4486689 (833)	total: 8m 22s	remaining: 2m 40s
+834:	learn: 4.2131360	test: 4.4486679	best: 4.4486679 (834)	total: 8m 23s	remaining: 2m 39s
+835:	learn: 4.2131227	test: 4.4486640	best: 4.4486640 (835)	total: 8m 24s	remaining: 2m 39s
+836:	learn: 4.2131144	test: 4.4486728	best: 4.4486640 (835)	total: 8m 24s	remaining: 2m 38s
+837:	learn: 4.2130986	test: 4.4486644	best: 4.4486640 (835)	total: 8m 25s	remaining: 2m 38s
+838:	learn: 4.2130731	test: 4.4486571	best: 4.4486571 (838)	total: 8m 25s	remaining: 2m 37s
+839:	learn: 4.2130432	test: 4.4486635	best: 4.4486571 (838)	total: 8m 26s	remaining: 2m 36s
+840:	learn: 4.2130373	test: 4.4486598	best: 4.4486571 (838)	total: 8m 27s	remaining: 2m 36s
+841:	learn: 4.2128698	test: 4.4485656	best: 4.4485656 (841)	total: 8m 27s	remaining: 2m 35s
+842:	learn: 4.2127743	test: 4.4484819	best: 4.4484819 (842)	total: 8m 28s	remaining: 2m 35s
+843:	learn: 4.2127201	test: 4.4484531	best: 4.4484531 (843)	total: 8m 29s	remaining: 2m 34s
+844:	learn: 4.2124965	test: 4.4484305	best: 4.4484305 (844)	total: 8m 29s	remaining: 2m 33s
+845:	learn: 4.2124506	test: 4.4483880	best: 4.4483880 (845)	total: 8m 30s	remaining: 2m 33s
+846:	learn: 4.2123353	test: 4.4482451	best: 4.4482451 (846)	total: 8m 30s	remaining: 2m 32s
+847:	learn: 4.2123142	test: 4.4482436	best: 4.4482436 (847)	total: 8m 31s	remaining: 2m 31s
+848:	learn: 4.2122695	test: 4.4482357	best: 4.4482357 (848)	total: 8m 31s	remaining: 2m 31s
+849:	learn: 4.2121381	test: 4.4482243	best: 4.4482243 (849)	total: 8m 32s	remaining: 2m 30s
+850:	learn: 4.2121123	test: 4.4482049	best: 4.4482049 (850)	total: 8m 33s	remaining: 2m 30s
+851:	learn: 4.2120820	test: 4.4481515	best: 4.4481515 (851)	total: 8m 33s	remaining: 2m 29s
+852:	learn: 4.2120527	test: 4.4481341	best: 4.4481341 (852)	total: 8m 34s	remaining: 2m 28s
+853:	learn: 4.2119371	test: 4.4480998	best: 4.4480998 (853)	total: 8m 35s	remaining: 2m 28s
+854:	learn: 4.2118713	test: 4.4480798	best: 4.4480798 (854)	total: 8m 35s	remaining: 2m 27s
+855:	learn: 4.2118506	test: 4.4480624	best: 4.4480624 (855)	total: 8m 36s	remaining: 2m 27s
+856:	learn: 4.2118425	test: 4.4480584	best: 4.4480584 (856)	total: 8m 37s	remaining: 2m 26s
+857:	learn: 4.2118050	test: 4.4480485	best: 4.4480485 (857)	total: 8m 37s	remaining: 2m 25s
+858:	learn: 4.2117700	test: 4.4480204	best: 4.4480204 (858)	total: 8m 38s	remaining: 2m 25s
+859:	learn: 4.2117172	test: 4.4479987	best: 4.4479987 (859)	total: 8m 38s	remaining: 2m 24s
+860:	learn: 4.2116797	test: 4.4480090	best: 4.4479987 (859)	total: 8m 39s	remaining: 2m 24s
+861:	learn: 4.2116033	test: 4.4478988	best: 4.4478988 (861)	total: 8m 40s	remaining: 2m 23s
+862:	learn: 4.2115661	test: 4.4478140	best: 4.4478140 (862)	total: 8m 40s	remaining: 2m 22s
+863:	learn: 4.2115390	test: 4.4477804	best: 4.4477804 (863)	total: 8m 41s	remaining: 2m 22s
+864:	learn: 4.2115247	test: 4.4477857	best: 4.4477804 (863)	total: 8m 42s	remaining: 2m 21s
+865:	learn: 4.2114774	test: 4.4477215	best: 4.4477215 (865)	total: 8m 42s	remaining: 2m 21s
+866:	learn: 4.2114709	test: 4.4477213	best: 4.4477213 (866)	total: 8m 43s	remaining: 2m 20s
+867:	learn: 4.2114080	test: 4.4477297	best: 4.4477213 (866)	total: 8m 44s	remaining: 2m 20s
+868:	learn: 4.2113578	test: 4.4477245	best: 4.4477213 (866)	total: 8m 44s	remaining: 2m 19s
+869:	learn: 4.2113220	test: 4.4476918	best: 4.4476918 (869)	total: 8m 45s	remaining: 2m 18s
+870:	learn: 4.2112645	test: 4.4477188	best: 4.4476918 (869)	total: 8m 46s	remaining: 2m 18s
+871:	learn: 4.2112371	test: 4.4476493	best: 4.4476493 (871)	total: 8m 46s	remaining: 2m 17s
+872:	learn: 4.2111984	test: 4.4476229	best: 4.4476229 (872)	total: 8m 47s	remaining: 2m 17s
+873:	learn: 4.2111699	test: 4.4476246	best: 4.4476229 (872)	total: 8m 47s	remaining: 2m 16s
+874:	learn: 4.2111436	test: 4.4476153	best: 4.4476153 (874)	total: 8m 48s	remaining: 2m 15s
+875:	learn: 4.2110314	test: 4.4475182	best: 4.4475182 (875)	total: 8m 48s	remaining: 2m 15s
+876:	learn: 4.2110075	test: 4.4475215	best: 4.4475182 (875)	total: 8m 49s	remaining: 2m 14s
+877:	learn: 4.2109704	test: 4.4474858	best: 4.4474858 (877)	total: 8m 50s	remaining: 2m 14s
+878:	learn: 4.2109186	test: 4.4474473	best: 4.4474473 (878)	total: 8m 51s	remaining: 2m 13s
+879:	learn: 4.2108956	test: 4.4474276	best: 4.4474276 (879)	total: 8m 51s	remaining: 2m 12s
+880:	learn: 4.2108606	test: 4.4474143	best: 4.4474143 (880)	total: 8m 52s	remaining: 2m 12s
+881:	learn: 4.2108335	test: 4.4473954	best: 4.4473954 (881)	total: 8m 52s	remaining: 2m 11s
+882:	learn: 4.2106387	test: 4.4474821	best: 4.4473954 (881)	total: 8m 53s	remaining: 2m 11s
+883:	learn: 4.2106296	test: 4.4474797	best: 4.4473954 (881)	total: 8m 54s	remaining: 2m 10s
+884:	learn: 4.2106057	test: 4.4474843	best: 4.4473954 (881)	total: 8m 54s	remaining: 2m 9s
+885:	learn: 4.2105258	test: 4.4474371	best: 4.4473954 (881)	total: 8m 55s	remaining: 2m 9s
+886:	learn: 4.2104962	test: 4.4474356	best: 4.4473954 (881)	total: 8m 55s	remaining: 2m 8s
+887:	learn: 4.2104778	test: 4.4474296	best: 4.4473954 (881)	total: 8m 56s	remaining: 2m 8s
+888:	learn: 4.2104652	test: 4.4474395	best: 4.4473954 (881)	total: 8m 57s	remaining: 2m 7s
+889:	learn: 4.2104431	test: 4.4474380	best: 4.4473954 (881)	total: 8m 57s	remaining: 2m 6s
+890:	learn: 4.2104276	test: 4.4474257	best: 4.4473954 (881)	total: 8m 58s	remaining: 2m 6s
+891:	learn: 4.2103710	test: 4.4473898	best: 4.4473898 (891)	total: 8m 59s	remaining: 2m 5s
+892:	learn: 4.2103441	test: 4.4473826	best: 4.4473826 (892)	total: 9m	remaining: 2m 5s
+893:	learn: 4.2103198	test: 4.4473687	best: 4.4473687 (893)	total: 9m	remaining: 2m 4s
+894:	learn: 4.2103146	test: 4.4473709	best: 4.4473687 (893)	total: 9m 1s	remaining: 2m 4s
+895:	learn: 4.2102314	test: 4.4473286	best: 4.4473286 (895)	total: 9m 2s	remaining: 2m 3s
+896:	learn: 4.2102264	test: 4.4473214	best: 4.4473214 (896)	total: 9m 2s	remaining: 2m 2s
+897:	learn: 4.2102208	test: 4.4473214	best: 4.4473214 (896)	total: 9m 3s	remaining: 2m 2s
+898:	learn: 4.2101512	test: 4.4472970	best: 4.4472970 (898)	total: 9m 4s	remaining: 2m 1s
+899:	learn: 4.2100688	test: 4.4473078	best: 4.4472970 (898)	total: 9m 4s	remaining: 2m 1s
+900:	learn: 4.2100224	test: 4.4472706	best: 4.4472706 (900)	total: 9m 5s	remaining: 2m
+901:	learn: 4.2099921	test: 4.4472122	best: 4.4472122 (901)	total: 9m 6s	remaining: 1m 59s
+902:	learn: 4.2099774	test: 4.4471813	best: 4.4471813 (902)	total: 9m 6s	remaining: 1m 59s
+903:	learn: 4.2099261	test: 4.4471619	best: 4.4471619 (903)	total: 9m 7s	remaining: 1m 58s
+904:	learn: 4.2098670	test: 4.4471339	best: 4.4471339 (904)	total: 9m 8s	remaining: 1m 58s
+905:	learn: 4.2098291	test: 4.4471006	best: 4.4471006 (905)	total: 9m 8s	remaining: 1m 57s
+906:	learn: 4.2097804	test: 4.4471205	best: 4.4471006 (905)	total: 9m 9s	remaining: 1m 56s
+907:	learn: 4.2097437	test: 4.4471073	best: 4.4471006 (905)	total: 9m 10s	remaining: 1m 56s
+908:	learn: 4.2097294	test: 4.4470890	best: 4.4470890 (908)	total: 9m 10s	remaining: 1m 55s
+909:	learn: 4.2096636	test: 4.4470223	best: 4.4470223 (909)	total: 9m 11s	remaining: 1m 55s
+910:	learn: 4.2096004	test: 4.4469929	best: 4.4469929 (910)	total: 9m 11s	remaining: 1m 54s
+911:	learn: 4.2095864	test: 4.4469825	best: 4.4469825 (911)	total: 9m 12s	remaining: 1m 53s
+912:	learn: 4.2095706	test: 4.4469710	best: 4.4469710 (912)	total: 9m 12s	remaining: 1m 53s
+913:	learn: 4.2095636	test: 4.4469689	best: 4.4469689 (913)	total: 9m 13s	remaining: 1m 52s
+914:	learn: 4.2095321	test: 4.4469302	best: 4.4469302 (914)	total: 9m 14s	remaining: 1m 52s
+915:	learn: 4.2093980	test: 4.4469146	best: 4.4469146 (915)	total: 9m 14s	remaining: 1m 51s
+916:	learn: 4.2093362	test: 4.4469240	best: 4.4469146 (915)	total: 9m 15s	remaining: 1m 50s
+917:	learn: 4.2092807	test: 4.4468990	best: 4.4468990 (917)	total: 9m 15s	remaining: 1m 50s
+918:	learn: 4.2092677	test: 4.4468825	best: 4.4468825 (918)	total: 9m 16s	remaining: 1m 49s
+919:	learn: 4.2092167	test: 4.4468544	best: 4.4468544 (919)	total: 9m 16s	remaining: 1m 48s
+920:	learn: 4.2091945	test: 4.4468553	best: 4.4468544 (919)	total: 9m 17s	remaining: 1m 48s
+921:	learn: 4.2091160	test: 4.4467947	best: 4.4467947 (921)	total: 9m 18s	remaining: 1m 47s
+922:	learn: 4.2090742	test: 4.4467605	best: 4.4467605 (922)	total: 9m 18s	remaining: 1m 47s
+923:	learn: 4.2090609	test: 4.4467602	best: 4.4467602 (923)	total: 9m 19s	remaining: 1m 46s
+924:	learn: 4.2090320	test: 4.4467420	best: 4.4467420 (924)	total: 9m 19s	remaining: 1m 45s
+925:	learn: 4.2090258	test: 4.4467384	best: 4.4467384 (925)	total: 9m 20s	remaining: 1m 45s
+926:	learn: 4.2089564	test: 4.4467398	best: 4.4467384 (925)	total: 9m 21s	remaining: 1m 44s
+927:	learn: 4.2088952	test: 4.4467027	best: 4.4467027 (927)	total: 9m 21s	remaining: 1m 44s
+928:	learn: 4.2088810	test: 4.4467053	best: 4.4467027 (927)	total: 9m 22s	remaining: 1m 43s
+929:	learn: 4.2088623	test: 4.4466940	best: 4.4466940 (929)	total: 9m 23s	remaining: 1m 42s
+930:	learn: 4.2087408	test: 4.4466702	best: 4.4466702 (930)	total: 9m 23s	remaining: 1m 42s
+931:	learn: 4.2087158	test: 4.4466771	best: 4.4466702 (930)	total: 9m 24s	remaining: 1m 41s
+932:	learn: 4.2084736	test: 4.4464329	best: 4.4464329 (932)	total: 9m 24s	remaining: 1m 41s
+933:	learn: 4.2084634	test: 4.4464398	best: 4.4464329 (932)	total: 9m 25s	remaining: 1m 40s
+934:	learn: 4.2084292	test: 4.4464268	best: 4.4464268 (934)	total: 9m 26s	remaining: 1m 39s
+935:	learn: 4.2082808	test: 4.4462640	best: 4.4462640 (935)	total: 9m 26s	remaining: 1m 39s
+936:	learn: 4.2082513	test: 4.4462617	best: 4.4462617 (936)	total: 9m 27s	remaining: 1m 38s
+937:	learn: 4.2082229	test: 4.4462590	best: 4.4462590 (937)	total: 9m 27s	remaining: 1m 38s
+938:	learn: 4.2081451	test: 4.4462766	best: 4.4462590 (937)	total: 9m 28s	remaining: 1m 37s
+939:	learn: 4.2081137	test: 4.4462740	best: 4.4462590 (937)	total: 9m 29s	remaining: 1m 36s
+940:	learn: 4.2080745	test: 4.4462205	best: 4.4462205 (940)	total: 9m 29s	remaining: 1m 36s
+941:	learn: 4.2080339	test: 4.4462254	best: 4.4462205 (940)	total: 9m 30s	remaining: 1m 35s
+942:	learn: 4.2080048	test: 4.4462154	best: 4.4462154 (942)	total: 9m 30s	remaining: 1m 35s
+943:	learn: 4.2079843	test: 4.4462043	best: 4.4462043 (943)	total: 9m 31s	remaining: 1m 34s
+944:	learn: 4.2079525	test: 4.4461939	best: 4.4461939 (944)	total: 9m 32s	remaining: 1m 33s
+945:	learn: 4.2079217	test: 4.4461492	best: 4.4461492 (945)	total: 9m 32s	remaining: 1m 33s
+946:	learn: 4.2078900	test: 4.4461124	best: 4.4461124 (946)	total: 9m 33s	remaining: 1m 32s
+947:	learn: 4.2078673	test: 4.4460856	best: 4.4460856 (947)	total: 9m 33s	remaining: 1m 32s
+948:	learn: 4.2078337	test: 4.4460587	best: 4.4460587 (948)	total: 9m 34s	remaining: 1m 31s
+949:	learn: 4.2077807	test: 4.4460004	best: 4.4460004 (949)	total: 9m 35s	remaining: 1m 30s
+950:	learn: 4.2077134	test: 4.4459796	best: 4.4459796 (950)	total: 9m 35s	remaining: 1m 30s
+951:	learn: 4.2076837	test: 4.4459459	best: 4.4459459 (951)	total: 9m 36s	remaining: 1m 29s
+952:	learn: 4.2076737	test: 4.4459442	best: 4.4459442 (952)	total: 9m 37s	remaining: 1m 29s
+953:	learn: 4.2076266	test: 4.4459784	best: 4.4459442 (952)	total: 9m 37s	remaining: 1m 28s
+954:	learn: 4.2075377	test: 4.4459183	best: 4.4459183 (954)	total: 9m 38s	remaining: 1m 27s
+955:	learn: 4.2075110	test: 4.4458952	best: 4.4458952 (955)	total: 9m 39s	remaining: 1m 27s
+956:	learn: 4.2073897	test: 4.4459090	best: 4.4458952 (955)	total: 9m 39s	remaining: 1m 26s
+957:	learn: 4.2073620	test: 4.4459043	best: 4.4458952 (955)	total: 9m 40s	remaining: 1m 25s
+958:	learn: 4.2073469	test: 4.4459013	best: 4.4458952 (955)	total: 9m 41s	remaining: 1m 25s
+959:	learn: 4.2073406	test: 4.4458967	best: 4.4458952 (955)	total: 9m 41s	remaining: 1m 24s
+960:	learn: 4.2072469	test: 4.4458426	best: 4.4458426 (960)	total: 9m 42s	remaining: 1m 24s
+961:	learn: 4.2071945	test: 4.4457242	best: 4.4457242 (961)	total: 9m 42s	remaining: 1m 23s
+962:	learn: 4.2071728	test: 4.4457124	best: 4.4457124 (962)	total: 9m 43s	remaining: 1m 23s
+963:	learn: 4.2071270	test: 4.4456921	best: 4.4456921 (963)	total: 9m 44s	remaining: 1m 22s
+964:	learn: 4.2070597	test: 4.4457527	best: 4.4456921 (963)	total: 9m 44s	remaining: 1m 21s
+965:	learn: 4.2070233	test: 4.4457107	best: 4.4456921 (963)	total: 9m 45s	remaining: 1m 21s
+966:	learn: 4.2069965	test: 4.4457094	best: 4.4456921 (963)	total: 9m 46s	remaining: 1m 20s
+967:	learn: 4.2069847	test: 4.4456935	best: 4.4456921 (963)	total: 9m 46s	remaining: 1m 20s
+968:	learn: 4.2069042	test: 4.4456968	best: 4.4456921 (963)	total: 9m 47s	remaining: 1m 19s
+969:	learn: 4.2068659	test: 4.4456666	best: 4.4456666 (969)	total: 9m 48s	remaining: 1m 18s
+970:	learn: 4.2068016	test: 4.4456545	best: 4.4456545 (970)	total: 9m 48s	remaining: 1m 18s
+971:	learn: 4.2067830	test: 4.4456558	best: 4.4456545 (970)	total: 9m 49s	remaining: 1m 17s
+972:	learn: 4.2067654	test: 4.4456588	best: 4.4456545 (970)	total: 9m 50s	remaining: 1m 17s
+973:	learn: 4.2067502	test: 4.4456563	best: 4.4456545 (970)	total: 9m 50s	remaining: 1m 16s
+974:	learn: 4.2067040	test: 4.4456213	best: 4.4456213 (974)	total: 9m 51s	remaining: 1m 15s
+975:	learn: 4.2066512	test: 4.4455796	best: 4.4455796 (975)	total: 9m 52s	remaining: 1m 15s
+976:	learn: 4.2064836	test: 4.4454595	best: 4.4454595 (976)	total: 9m 53s	remaining: 1m 14s
+977:	learn: 4.2064368	test: 4.4454389	best: 4.4454389 (977)	total: 9m 53s	remaining: 1m 14s
+978:	learn: 4.2063651	test: 4.4454101	best: 4.4454101 (978)	total: 9m 54s	remaining: 1m 13s
+979:	learn: 4.2063537	test: 4.4454050	best: 4.4454050 (979)	total: 9m 54s	remaining: 1m 12s
+980:	learn: 4.2062977	test: 4.4453735	best: 4.4453735 (980)	total: 9m 55s	remaining: 1m 12s
+981:	learn: 4.2062163	test: 4.4454001	best: 4.4453735 (980)	total: 9m 56s	remaining: 1m 11s
+982:	learn: 4.2061689	test: 4.4454151	best: 4.4453735 (980)	total: 9m 56s	remaining: 1m 11s
+983:	learn: 4.2061470	test: 4.4454040	best: 4.4453735 (980)	total: 9m 57s	remaining: 1m 10s
+984:	learn: 4.2060997	test: 4.4453605	best: 4.4453605 (984)	total: 9m 57s	remaining: 1m 9s
+985:	learn: 4.2060610	test: 4.4453208	best: 4.4453208 (985)	total: 9m 58s	remaining: 1m 9s
+986:	learn: 4.2060119	test: 4.4453900	best: 4.4453208 (985)	total: 9m 58s	remaining: 1m 8s
+987:	learn: 4.2059675	test: 4.4453899	best: 4.4453208 (985)	total: 9m 59s	remaining: 1m 7s
+988:	learn: 4.2059146	test: 4.4453558	best: 4.4453208 (985)	total: 10m	remaining: 1m 7s
+989:	learn: 4.2058769	test: 4.4453210	best: 4.4453208 (985)	total: 10m	remaining: 1m 6s
+990:	learn: 4.2058663	test: 4.4453274	best: 4.4453208 (985)	total: 10m 1s	remaining: 1m 6s
+991:	learn: 4.2058493	test: 4.4453136	best: 4.4453136 (991)	total: 10m 2s	remaining: 1m 5s
+992:	learn: 4.2057152	test: 4.4453025	best: 4.4453025 (992)	total: 10m 2s	remaining: 1m 4s
+993:	learn: 4.2057060	test: 4.4453037	best: 4.4453025 (992)	total: 10m 3s	remaining: 1m 4s
+994:	learn: 4.2056873	test: 4.4453079	best: 4.4453025 (992)	total: 10m 3s	remaining: 1m 3s
+995:	learn: 4.2056697	test: 4.4453013	best: 4.4453013 (995)	total: 10m 4s	remaining: 1m 3s
+996:	learn: 4.2056443	test: 4.4452940	best: 4.4452940 (996)	total: 10m 5s	remaining: 1m 2s
+997:	learn: 4.2055660	test: 4.4452800	best: 4.4452800 (997)	total: 10m 5s	remaining: 1m 1s
+998:	learn: 4.2055449	test: 4.4452697	best: 4.4452697 (998)	total: 10m 6s	remaining: 1m 1s
+999:	learn: 4.2055357	test: 4.4452703	best: 4.4452697 (998)	total: 10m 7s	remaining: 1m
+1000:	learn: 4.2055023	test: 4.4452761	best: 4.4452697 (998)	total: 10m 7s	remaining: 1m
+1001:	learn: 4.2055000	test: 4.4452731	best: 4.4452697 (998)	total: 10m 8s	remaining: 59.5s
+1002:	learn: 4.2054498	test: 4.4452437	best: 4.4452437 (1002)	total: 10m 8s	remaining: 58.9s
+1003:	learn: 4.2053913	test: 4.4452249	best: 4.4452249 (1003)	total: 10m 9s	remaining: 58.3s
+1004:	learn: 4.2053783	test: 4.4452129	best: 4.4452129 (1004)	total: 10m 10s	remaining: 57.7s
+1005:	learn: 4.2052534	test: 4.4450499	best: 4.4450499 (1005)	total: 10m 10s	remaining: 57.1s
+1006:	learn: 4.2051822	test: 4.4450439	best: 4.4450439 (1006)	total: 10m 11s	remaining: 56.5s
+1007:	learn: 4.2051597	test: 4.4450325	best: 4.4450325 (1007)	total: 10m 12s	remaining: 55.9s
+1008:	learn: 4.2050759	test: 4.4449761	best: 4.4449761 (1008)	total: 10m 12s	remaining: 55.3s
+1009:	learn: 4.2050716	test: 4.4449699	best: 4.4449699 (1009)	total: 10m 13s	remaining: 54.7s
+1010:	learn: 4.2050407	test: 4.4449741	best: 4.4449699 (1009)	total: 10m 13s	remaining: 54s
+1011:	learn: 4.2049552	test: 4.4449372	best: 4.4449372 (1011)	total: 10m 14s	remaining: 53.4s
+1012:	learn: 4.2048947	test: 4.4448814	best: 4.4448814 (1012)	total: 10m 14s	remaining: 52.8s
+1013:	learn: 4.2048189	test: 4.4448583	best: 4.4448583 (1013)	total: 10m 15s	remaining: 52.2s
+1014:	learn: 4.2047787	test: 4.4448547	best: 4.4448547 (1014)	total: 10m 16s	remaining: 51.6s
+1015:	learn: 4.2047305	test: 4.4448330	best: 4.4448330 (1015)	total: 10m 16s	remaining: 51s
+1016:	learn: 4.2047088	test: 4.4448514	best: 4.4448330 (1015)	total: 10m 17s	remaining: 50.4s
+1017:	learn: 4.2046983	test: 4.4448484	best: 4.4448330 (1015)	total: 10m 18s	remaining: 49.8s
+1018:	learn: 4.2046708	test: 4.4448409	best: 4.4448330 (1015)	total: 10m 18s	remaining: 49.2s
+1019:	learn: 4.2046585	test: 4.4448392	best: 4.4448330 (1015)	total: 10m 19s	remaining: 48.6s
+1020:	learn: 4.2046355	test: 4.4448391	best: 4.4448330 (1015)	total: 10m 20s	remaining: 48s
+1021:	learn: 4.2046201	test: 4.4448248	best: 4.4448248 (1021)	total: 10m 20s	remaining: 47.4s
+1022:	learn: 4.2045834	test: 4.4448161	best: 4.4448161 (1022)	total: 10m 21s	remaining: 46.8s
+1023:	learn: 4.2044828	test: 4.4447741	best: 4.4447741 (1023)	total: 10m 21s	remaining: 46.1s
+1024:	learn: 4.2044800	test: 4.4447757	best: 4.4447741 (1023)	total: 10m 22s	remaining: 45.5s
+1025:	learn: 4.2044615	test: 4.4447697	best: 4.4447697 (1025)	total: 10m 23s	remaining: 44.9s
+1026:	learn: 4.2044314	test: 4.4447397	best: 4.4447397 (1026)	total: 10m 23s	remaining: 44.3s
+1027:	learn: 4.2044100	test: 4.4447331	best: 4.4447331 (1027)	total: 10m 24s	remaining: 43.7s
+1028:	learn: 4.2043454	test: 4.4447289	best: 4.4447289 (1028)	total: 10m 24s	remaining: 43.1s
+1029:	learn: 4.2043335	test: 4.4447271	best: 4.4447271 (1029)	total: 10m 25s	remaining: 42.5s
+1030:	learn: 4.2042492	test: 4.4446595	best: 4.4446595 (1030)	total: 10m 26s	remaining: 41.9s
+1031:	learn: 4.2042038	test: 4.4445869	best: 4.4445869 (1031)	total: 10m 26s	remaining: 41.3s
+1032:	learn: 4.2041615	test: 4.4445319	best: 4.4445319 (1032)	total: 10m 27s	remaining: 40.7s
+1033:	learn: 4.2041399	test: 4.4445647	best: 4.4445319 (1032)	total: 10m 28s	remaining: 40.1s
+1034:	learn: 4.2041332	test: 4.4445572	best: 4.4445319 (1032)	total: 10m 28s	remaining: 39.5s
+1035:	learn: 4.2040816	test: 4.4445436	best: 4.4445319 (1032)	total: 10m 29s	remaining: 38.9s
+1036:	learn: 4.2040379	test: 4.4445012	best: 4.4445012 (1036)	total: 10m 29s	remaining: 38.3s
+1037:	learn: 4.2040317	test: 4.4445000	best: 4.4445000 (1037)	total: 10m 30s	remaining: 37.6s
+1038:	learn: 4.2040096	test: 4.4444886	best: 4.4444886 (1038)	total: 10m 30s	remaining: 37s
+1039:	learn: 4.2039766	test: 4.4444923	best: 4.4444886 (1038)	total: 10m 31s	remaining: 36.4s
+1040:	learn: 4.2039595	test: 4.4444763	best: 4.4444763 (1040)	total: 10m 32s	remaining: 35.8s
+1041:	learn: 4.2039483	test: 4.4444711	best: 4.4444711 (1041)	total: 10m 32s	remaining: 35.2s
+1042:	learn: 4.2039164	test: 4.4444660	best: 4.4444660 (1042)	total: 10m 33s	remaining: 34.6s
+1043:	learn: 4.2038952	test: 4.4444536	best: 4.4444536 (1043)	total: 10m 34s	remaining: 34s
+1044:	learn: 4.2038717	test: 4.4444342	best: 4.4444342 (1044)	total: 10m 34s	remaining: 33.4s
+1045:	learn: 4.2038558	test: 4.4444299	best: 4.4444299 (1045)	total: 10m 35s	remaining: 32.8s
+1046:	learn: 4.2038328	test: 4.4444231	best: 4.4444231 (1046)	total: 10m 36s	remaining: 32.2s
+1047:	learn: 4.2036905	test: 4.4443892	best: 4.4443892 (1047)	total: 10m 36s	remaining: 31.6s
+1048:	learn: 4.2036378	test: 4.4443138	best: 4.4443138 (1048)	total: 10m 37s	remaining: 31s
+1049:	learn: 4.2035668	test: 4.4443075	best: 4.4443075 (1049)	total: 10m 37s	remaining: 30.4s
+1050:	learn: 4.2035555	test: 4.4443023	best: 4.4443023 (1050)	total: 10m 38s	remaining: 29.8s
+1051:	learn: 4.2035160	test: 4.4442895	best: 4.4442895 (1051)	total: 10m 39s	remaining: 29.2s
+1052:	learn: 4.2034876	test: 4.4442937	best: 4.4442895 (1051)	total: 10m 39s	remaining: 28.6s
+1053:	learn: 4.2034586	test: 4.4443015	best: 4.4442895 (1051)	total: 10m 40s	remaining: 28s
+1054:	learn: 4.2033957	test: 4.4442256	best: 4.4442256 (1054)	total: 10m 41s	remaining: 27.3s
+1055:	learn: 4.2032727	test: 4.4441296	best: 4.4441296 (1055)	total: 10m 41s	remaining: 26.7s
+1056:	learn: 4.2032335	test: 4.4441130	best: 4.4441130 (1056)	total: 10m 42s	remaining: 26.1s
+1057:	learn: 4.2032062	test: 4.4441137	best: 4.4441130 (1056)	total: 10m 42s	remaining: 25.5s
+1058:	learn: 4.2031772	test: 4.4441145	best: 4.4441130 (1056)	total: 10m 43s	remaining: 24.9s
+1059:	learn: 4.2031356	test: 4.4441098	best: 4.4441098 (1059)	total: 10m 44s	remaining: 24.3s
+1060:	learn: 4.2030957	test: 4.4440900	best: 4.4440900 (1060)	total: 10m 45s	remaining: 23.7s
+1061:	learn: 4.2030653	test: 4.4441019	best: 4.4440900 (1060)	total: 10m 45s	remaining: 23.1s
+1062:	learn: 4.2030464	test: 4.4440992	best: 4.4440900 (1060)	total: 10m 46s	remaining: 22.5s
+1063:	learn: 4.2029960	test: 4.4440723	best: 4.4440723 (1063)	total: 10m 47s	remaining: 21.9s
+1064:	learn: 4.2029703	test: 4.4440580	best: 4.4440580 (1064)	total: 10m 47s	remaining: 21.3s
+1065:	learn: 4.2029641	test: 4.4440504	best: 4.4440504 (1065)	total: 10m 48s	remaining: 20.7s
+1066:	learn: 4.2028673	test: 4.4439637	best: 4.4439637 (1066)	total: 10m 48s	remaining: 20.1s
+1067:	learn: 4.2027978	test: 4.4439262	best: 4.4439262 (1067)	total: 10m 49s	remaining: 19.5s
+1068:	learn: 4.2027802	test: 4.4439369	best: 4.4439262 (1067)	total: 10m 50s	remaining: 18.9s
+1069:	learn: 4.2027691	test: 4.4439357	best: 4.4439262 (1067)	total: 10m 50s	remaining: 18.2s
+1070:	learn: 4.2026740	test: 4.4439088	best: 4.4439088 (1070)	total: 10m 51s	remaining: 17.6s
+1071:	learn: 4.2026656	test: 4.4439135	best: 4.4439088 (1070)	total: 10m 52s	remaining: 17s
+1072:	learn: 4.2026381	test: 4.4439075	best: 4.4439075 (1072)	total: 10m 52s	remaining: 16.4s
+1073:	learn: 4.2025881	test: 4.4438567	best: 4.4438567 (1073)	total: 10m 53s	remaining: 15.8s
+1074:	learn: 4.2025798	test: 4.4438531	best: 4.4438531 (1074)	total: 10m 53s	remaining: 15.2s
+1075:	learn: 4.2025482	test: 4.4438552	best: 4.4438531 (1074)	total: 10m 54s	remaining: 14.6s
+1076:	learn: 4.2025224	test: 4.4438459	best: 4.4438459 (1076)	total: 10m 55s	remaining: 14s
+1077:	learn: 4.2024563	test: 4.4438210	best: 4.4438210 (1077)	total: 10m 55s	remaining: 13.4s
+1078:	learn: 4.2024277	test: 4.4438339	best: 4.4438210 (1077)	total: 10m 56s	remaining: 12.8s
+1079:	learn: 4.2024123	test: 4.4438397	best: 4.4438210 (1077)	total: 10m 57s	remaining: 12.2s
+1080:	learn: 4.2023592	test: 4.4438054	best: 4.4438054 (1080)	total: 10m 57s	remaining: 11.6s
+1081:	learn: 4.2023233	test: 4.4437840	best: 4.4437840 (1081)	total: 10m 58s	remaining: 10.9s
+1082:	learn: 4.2022666	test: 4.4437328	best: 4.4437328 (1082)	total: 10m 58s	remaining: 10.3s
+1083:	learn: 4.2022349	test: 4.4437357	best: 4.4437328 (1082)	total: 10m 59s	remaining: 9.73s
+1084:	learn: 4.2022114	test: 4.4437331	best: 4.4437328 (1082)	total: 11m	remaining: 9.13s
+1085:	learn: 4.2021858	test: 4.4437217	best: 4.4437217 (1085)	total: 11m	remaining: 8.52s
+1086:	learn: 4.2021632	test: 4.4436982	best: 4.4436982 (1086)	total: 11m 1s	remaining: 7.91s
+1087:	learn: 4.2020955	test: 4.4436922	best: 4.4436922 (1087)	total: 11m 2s	remaining: 7.3s
+1088:	learn: 4.2020885	test: 4.4436952	best: 4.4436922 (1087)	total: 11m 2s	remaining: 6.69s
+1089:	learn: 4.2020324	test: 4.4436889	best: 4.4436889 (1089)	total: 11m 3s	remaining: 6.08s
+1090:	learn: 4.2020140	test: 4.4436830	best: 4.4436830 (1090)	total: 11m 3s	remaining: 5.48s
+1091:	learn: 4.2019484	test: 4.4436705	best: 4.4436705 (1091)	total: 11m 4s	remaining: 4.87s
+1092:	learn: 4.2019419	test: 4.4436702	best: 4.4436702 (1092)	total: 11m 5s	remaining: 4.26s
+1093:	learn: 4.2019202	test: 4.4436690	best: 4.4436690 (1093)	total: 11m 5s	remaining: 3.65s
+1094:	learn: 4.2018913	test: 4.4436539	best: 4.4436539 (1094)	total: 11m 6s	remaining: 3.04s
+1095:	learn: 4.2017993	test: 4.4436812	best: 4.4436539 (1094)	total: 11m 7s	remaining: 2.44s
+1096:	learn: 4.2017560	test: 4.4436865	best: 4.4436539 (1094)	total: 11m 7s	remaining: 1.83s
+1097:	learn: 4.2017290	test: 4.4436758	best: 4.4436539 (1094)	total: 11m 8s	remaining: 1.22s
+1098:	learn: 4.2016612	test: 4.4436408	best: 4.4436408 (1098)	total: 11m 9s	remaining: 609ms
+1099:	learn: 4.2016337	test: 4.4436314	best: 4.4436314 (1099)	total: 11m 9s	remaining: 0us
+bestTest = 4.443631355
+bestIteration = 1099
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} <catboost.core.CatBoostRegressor at 0x13103699e80>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} bestTest = 4.211418494}
+        \PY{c+c1}{\PYZsh{} bestIteration = 998}
+        \PY{c+c1}{\PYZsh{} Shrink model to first 999 iterations.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{preds}\PY{o}{=}\PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{p}{)}
+         \PY{n}{preds}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} array([1.84042302, 1.07667815, 1.76237035, {\ldots}, 1.22957184, 1.22151833,
+                3.28742829])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{SalesQuantity}\PY{p}{,}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{pred}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} 4.186626630108601
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x131036c8240>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{model}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{model}\PY{o}{.}\PY{n}{feature\PYZus{}names\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1314dad6860>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{data-fix-for-sklearn}{%
+\subsection{Data fix for Sklearn}\label{data-fix-for-sklearn}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{cat\PYZus{}vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductGroup1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductGroup2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prod\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{enc}\PY{o}{=}\PY{n}{OneHotEncoder}\PY{p}{(}\PY{p}{)}
+         \PY{n}{train\PYZus{}spa}\PY{o}{=}\PY{n}{enc}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{n}{cat\PYZus{}vars}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{test\PYZus{}spa}\PY{o}{=}\PY{n}{enc}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{n}{cat\PYZus{}vars}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{sparse} \PY{k}{import} \PY{n}{hstack}
+         \PY{n}{train\PYZus{}spa}\PY{o}{=}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}spa}\PY{p}{,}\PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{n}{cat\PYZus{}vars}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{test\PYZus{}spa}\PY{o}{=}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{,}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{n}{cat\PYZus{}vars}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{linear-regression}{%
+\section{Linear Regression}\label{linear-regression}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{model\PYZus{}lr}\PY{o}{=}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}spa}\PY{p}{,}\PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4.310100704230157
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x13104842ef0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{sgd}{%
+\section{SGD}\label{sgd}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{model\PYZus{}sgd}\PY{o}{=}\PY{n}{SGDRegressor}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model\PYZus{}sgd}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}spa}\PY{p}{,}\PY{n}{train\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model\PYZus{}sgd}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4.309856412612443
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x13104893da0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{preds}\PY{o}{=}\PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{SalesQuantity}\PY{p}{,}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{pred}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model\PYZus{}sgd}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SGD :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LR :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Decision Tree : 4.186626630108601
+SGD : 4.309856412612443
+LR : 4.310100704230157
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{preds}\PY{o}{=}\PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{SalesQuantity}\PY{p}{,}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{pred}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model\PYZus{}sgd}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SGD :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LR :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Decision Tree : 1.8949277371048738
+SGD : 2.01897247502969
+LR : 2.05779572637851
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{fig}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SGD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{l+m+mi}{2300}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Linear Regression}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{prom5\PYZus{}index}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{between}\PY{p}{(}\PY{n}{promo\PYZus{}dates}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{promo\PYZus{}dates}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{label}\PY{o}{=}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{prom5\PYZus{}index}\PY{p}{]}
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}transf}\PY{p}{[}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{prom5\PYZus{}index}\PY{p}{]}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{label}
+         \PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{label}\PY{p}{,}\PY{n}{pew\PYZus{}df\PYZus{}cb}\PY{o}{.}\PY{n}{pred}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model\PYZus{}sgd}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{)}
+         \PY{n}{preds}\PY{o}{=}\PY{n}{preds}\PY{p}{[}\PY{n}{prom5\PYZus{}index}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SGD :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{label}
+         \PY{n}{pew\PYZus{}df\PYZus{}sgd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         
+         \PY{n}{preds}\PY{o}{=}\PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}spa}\PY{p}{)}
+         \PY{n}{preds}\PY{o}{=}\PY{n}{preds}\PY{p}{[}\PY{n}{prom5\PYZus{}index}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LR :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{p}{)}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SalesQuantity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{label}
+         \PY{n}{pew\PYZus{}df\PYZus{}lr}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pred}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Decision Tree : 2.4019770946353223
+SGD : 2.485497287522604
+LR : 2.5171790235081373
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{feature\PYZus{}coefs}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}\PY{p}{[}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{enc}\PY{o}{.}\PY{n}{get\PYZus{}feature\PYZus{}names}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{feature\PYZus{}coefs}\PY{p}{[}\PY{n}{n}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{feature\PYZus{}coefs}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{overall\PYZus{}}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{ind} \PY{o+ow}{in} \PY{n}{feature\PYZus{}coefs}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{overall\PYZus{}}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{n}{ind}\PY{p}{]}\PY{p}{)}
+             \PY{n}{feature\PYZus{}coefs}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{n}{overall\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{p}{[}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{feature\PYZus{}coefs}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{feature\PYZus{}coefs}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:} [4.133216882640234e-08,
+          -4.109430395971003e-08,
+          -1.0348006482530092e-06,
+          -8.386321161402144e-07,
+          -5.138743506938326e-06,
+          -4.277770623062338e-06,
+          1.2472348272923872e-06]
+\end{Verbatim}
+            
+    \hypertarget{which-store-has-more-sales-quantity}{%
+\subsubsection{Which store has more sales
+quantity}\label{which-store-has-more-sales-quantity}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n}{cat\PYZus{}vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductGroup1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductGroup2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prod\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{store\PYZus{}coefs}\PY{o}{=}\PY{n}{feature\PYZus{}coefs}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{store\PYZus{}index}\PY{o}{=}\PY{n}{store\PYZus{}coefs}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{store\PYZus{}coefs}\PY{p}{)}\PY{p}{)}
+         \PY{n}{enc}\PY{o}{.}\PY{n}{categories\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{store\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n+nb}{max}\PY{p}{(}\PY{n}{store\PYZus{}coefs}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}76}]:} (117, 1.2011309438554605)
+\end{Verbatim}
+            
+    \hypertarget{which-item-has-more-sales-quantity}{%
+\subsubsection{Which item has more sales
+quantity}\label{which-item-has-more-sales-quantity}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{cat\PYZus{}vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StoreCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductCode}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductGroup1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ProductGroup2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prod\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IsPromotion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{store\PYZus{}coefs}\PY{o}{=}\PY{n}{feature\PYZus{}coefs}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{store\PYZus{}index}\PY{o}{=}\PY{n}{store\PYZus{}coefs}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{store\PYZus{}coefs}\PY{p}{)}\PY{p}{)}
+        \PY{n}{enc}\PY{o}{.}\PY{n}{categories\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{store\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n+nb}{max}\PY{p}{(}\PY{n}{store\PYZus{}coefs}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

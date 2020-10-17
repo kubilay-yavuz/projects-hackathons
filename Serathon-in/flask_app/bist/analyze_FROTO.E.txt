@@ -1,0 +1,7 @@
+Yatýrým riskli, çünkü:
+Þu an için MACD_ISLEM FIYATI_USDEA.V deðeri -0.0 deðerinden küçük.
+Þu an için MACD_ISLEM FIYATI_AQIUO.V deðeri -0.0 deðerinden küçük.
+Þu an için MACD_ISLEM FIYATI_EGDPH.V deðeri 0.0 deðerinden büyük.
+Þu an için MACD_ISLEM FIYATI_SIDSK.V deðeri 0.0 deðerinden küçük.
+Þu an için MACD_ISLEM FIYATI_EGDPH.V deðeri -0.0 deðerinden büyük.
+Þu an için RSI_ISLEM FIYATI_NKDGF.V deðeri 27.1531 deðerinden küçük.

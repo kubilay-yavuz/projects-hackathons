@@ -1,0 +1,42 @@
+    <h1>Flask and matplotlib</h1>
+    <h2>Stock predictions for {num_x_points}</h2>
+    <form method=get action="/">
+    <select name="stock_value">
+          <option value="AKBNK">AKBNK</option>
+          <option value="ARCLK">ARCLK</option>
+          <option value="ASELS">ASELS</option>
+          <option value="BIMAS">BIMAS</option>
+          <option value="DOHOL">DOHOL</option>
+          <option value="EKGYO">EKGYO</option>
+          <option value="EREGL">EREGL</option>
+          <option value="FROTO">FROTO</option>
+          <option value="GARAN">GARAN</option>
+          <option value="HALKB">HALKB</option>
+          <option value="ISCTR">ISCTR</option>
+          <option value="KCHOL">KCHOL</option>
+          <option value="KOZAA">KOZAA</option>
+          <option value="KOZAL">KOZAL</option>
+          <option value="KRDMD">KRDMD</option>
+          <option value="PETKM">PETKM</option>
+          <option value="PGSUS">PGSUS</option>
+          <option value="SAHOL">SAHOL</option>
+          <option value="SISE">SISE</option>
+          <option value="SODA">SODA</option>
+          <option value="TAVHL">TAVHL</option>
+          <option value="TCELL">TCELL</option>
+          <option value="THYAO">THYAO</option>
+          <option value="TKFEN">TKFEN</option>
+          <option value="TOASO">TOASO</option>
+          <option value="TSKB">TSKB</option>
+          <option value="TTKOM">TTKOM</option>
+          <option value="TUPRS">TUPRS</option>
+          <option value="VAKBN">VAKBN</option>
+          <option value="YKBNK">YKBNK</option>      
+      <select/>
+<input type=submit value="update graph">
+    </form>
+    <h3>Plot as a png</h3>
+    <img src="/matplot-as-image-{num_x_points}.png"
+         alt="random points as png"
+         height="600"
+    >

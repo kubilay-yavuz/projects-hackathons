@@ -1,0 +1,7 @@
+Yatýrým mantýklý, çünkü:
+Þu an için RSI_ISLEM FIYATI_KCILJ.V deðeri 27.4824 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_PXDTA.V deðeri 0.0 deðerinden büyük.
+Þu an için MACD_ISLEM FIYATI_TTDYA.V deðeri -0.0 deðerinden küçük.
+Þu an için MACD_ISLEM FIYATI_AUDSB.V deðeri 0.0 deðerinden büyük.
+Þu an için RSI_ISLEM FIYATI_HBDAL.V deðeri 99.8188 deðerinden küçük.
+Þu an için MACD_ISLEM FIYATI_SIDBM.V deðeri 0.0 deðerinden büyük.

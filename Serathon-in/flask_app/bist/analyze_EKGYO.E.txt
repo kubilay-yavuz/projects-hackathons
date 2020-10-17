@@ -1,0 +1,2 @@
+Yatýrým mantýklý, çünkü:
+Þu an için RSI_ISLEM FIYATI_ERILO.V deðeri 74.3999 deðerinden küçük.Þu an için MACD_ISLEM FIYATI_EKIMA.V deðeri 0.0 deðerinden büyük.Þu an için MACD_ISLEM FIYATI_TODPN.V deðeri 0.0 deðerinden büyük.Þu an için RSI_ISLEM FIYATI_IBDPS.V deðeri 42.8649 deðerinden küçük.Þu an için MACD_ISLEM FIYATI_TTIJA.V deðeri 0.0 deðerinden büyük.Þu an için RSI_ISLEM FIYATI_TKIPT.V deðeri 0.0747 deðerinden küçük.

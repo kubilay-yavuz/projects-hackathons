@@ -1,0 +1,6 @@
+Þu an için RSI_ISLEM FIYATI_YKDLL.V deðeri 50.2772 deðerinden küçük.
+Þu an için MACD_ISLEM FIYATI_PEICH.V deðeri -0.0 deðerinden büyük.
+Þu an için RSI_ISLEM FIYATI_TOISL.V deðeri 13.3612 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_UZDVN.V deðeri 0.1471 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_TOITE.V deðeri 2.0102 deðerinden küçük.
+Þu an için TIME deðeri 0.4923 deðerinden büyük.

@@ -1,0 +1,7 @@
+Yatýrým riskli, çünkü:
+Þu an için WEEKDAY deðeri 2.5 deðerinden büyük.
+Þu an için MACD_ISLEM FIYATI_YBIAJ.V deðeri 0.0 deðerinden büyük.
+Þu an için RSI_ISLEM FIYATI_SPDYL.V deðeri 0.1177 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_UDIAG.V deðeri 15.6349 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_TCDTI.V deðeri 79.9867 deðerinden küçük.
+Þu an için MACD_ISLEM FIYATI_ABDAE.V deðeri -0.0 deðerinden büyük.

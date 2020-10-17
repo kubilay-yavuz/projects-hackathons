@@ -1,0 +1,7 @@
+Yatýrým mantýklý, çünkü:
+Þu an için TIME deðeri 0.5579 deðerinden büyük.
+Þu an için RSI_ISLEM FIYATI_ETDRY.V deðeri 0.0105 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_TODAN.V deðeri 0.8576 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_DXIUI.V deðeri 10.0734 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_GUITT.V deðeri 25.0263 deðerinden küçük.
+Þu an için RSI_ISLEM FIYATI_ABDAB.V deðeri 99.9997 deðerinden küçük.
